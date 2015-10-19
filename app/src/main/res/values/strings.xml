@@ -3,4 +3,52 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_sig_up">SigUp</string>
+    <string name="title_activity_sign_up">SignUp</string>
+    <string name="title_activity_forget_password">ForgetPassword</string>
+    <string name="title_activity_terms_conditions">TermsConditions</string>
+    <string name="title_activity_enter_otp">EnterOTP</string>
+    <string name="title_activity_resend_otp">ResendOTP</string>
+    <string name="title_activity_food_ex_home">FoodExHome</string>
+
+    <string-array name="city_array">
+        <item>Select City</item>
+        <item>Chennai</item>
+        <item>Madurai</item>
+        <item>Coimbatore</item>
+    </string-array>
+
+    <string-array name="area_array">
+        <item>Select Area</item>
+        <item>Medavakkam</item>
+        <item>Pallikaranai</item>
+        <item>Thoraipakkam</item>
+    </string-array>
+
+    <string-array name="state_array">
+        <item>Select State</item>
+        <item>TamilNadu</item>
+        <item>Karnataka</item>
+        <item>Andhra Pradesh</item>
+    </string-array>
+
+    <string name="title_activity_sample_check">SampleCheck</string>
+    <string name="title_activity_drawer_check">DrawerCheck</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+    <string name="title_activity_nav_drawer">NavDrawer</string>
+    <string name="title_activity_new_drawer">NewDrawer</string>
+    <string name="title_activity_new_nav_drawer">NewNavDrawer</string>
+    <string name="title_activity_aaa">aaa</string>
+    <string name="title_activity_nnn">NNN</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_image_viewer">ImageViewer</string>
+
 </resources>

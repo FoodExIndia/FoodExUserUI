@@ -1,27 +1,115 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<?xml version="1.0"?>
+
+    <LinearLayout tools:context=".MainActivity"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.user.ui.LoginPage" >
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <RelativeLayout android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="101dp"
-        android:layout_toRightOf="@+id/textView1"
-        android:text="Button" />
+    <ImageView android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#000e20d4"
+        android:scaleType="fitXY"
+        android:id="@+id/bgimg"
+        android:layout_below="@+id/forgotPasswordLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-</RelativeLayout>
+    <EditText android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#79818181"
+        android:id="@+id/Username"
+        android:inputType="text"
+        android:minHeight="50dp"
+        android:editable="true"
+        android:contextClickable="true"
+        android:hint="UserName"
+        android:clickable="true"
+        style="@android:style/Widget.DeviceDefault.EditText"
+        android:textColor="#010101"
+        android:layout_above="@+id/password"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp"/>
+
+    <EditText android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:background="#79818181"
+        android:id="@+id/password"
+        android:inputType="textPassword"
+        android:minHeight="50dp"
+        android:editable="true"
+        android:contextClickable="true"
+        android:clickable="true"
+        android:hint="Password"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_centerVertical="true"
+        android:maxHeight="50dp"
+        android:ems="10"
+        android:layout_margin="5dp"/>
+
+    <Button android:layout_height="wrap_content"
+        android:layout_width="@android:dimen/thumbnail_width"
+        android:id="@+id/loginbtn"
+        android:text="Login"
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/password"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/forgotPasswordLabel"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="#ba15f97d"
+        android:text="FoodEX"
+        android:textAlignment="center"
+        android:paddingLeft="100dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SignUp"
+            android:id="@+id/signupbtn"
+            android:layout_alignBottom="@+id/loginbtn"
+            android:layout_toRightOf="@+id/loginbtn"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password ??"
+            android:id="@+id/forgotpwd"
+            android:layout_below="@+id/loginbtn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="47dp"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms &amp; Conditions"
+            android:id="@+id/TC"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/errormsg"
+            android:layout_above="@+id/signupbtn"
+            android:layout_centerHorizontal="true"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

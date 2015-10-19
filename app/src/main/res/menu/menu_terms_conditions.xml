@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="user.com.foodexuserui.TermsConditions">
+
+    <item android:id="@+id/action_notification"
+        android:icon="@drawable/notification"
+        android:title="notifications"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_contacts"
+        android:title="Contacts"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_status"
+        android:title="Status"
+        android:orderInCategory="101"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_settings"
+        android:title="Settings"
+        android:orderInCategory="102"
+        app:showAsAction="never" />
+
+</menu>
