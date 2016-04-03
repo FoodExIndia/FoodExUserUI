@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="user.com.foodexuserui" >
+    package="user.com.foodexuserui">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -8,12 +8,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/food"
+        android:icon="@drawable/img_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Login"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,36 +22,69 @@
         </activity>
         <activity
             android:name=".SignUp"
-            android:label="@string/title_activity_sign_up" >
-        </activity>
+            android:label="@string/title_activity_sign_up" />
         <activity
             android:name=".ForgetPassword"
-            android:label="@string/title_activity_forget_password" >
-        </activity>
+            android:label="@string/title_activity_forget_password" />
         <activity
             android:name=".TermsConditions"
-            android:label="TermsConditions" >
-        </activity>
+            android:label="TermsConditions" />
         <activity
             android:name=".EnterOTP"
-            android:label="@string/title_activity_enter_otp" >
-        </activity>
+            android:label="@string/title_activity_enter_otp" />
         <activity
             android:name=".NewPassword"
-            android:label="@string/title_activity_resend_otp" >
-        </activity>
+            android:label="@string/title_activity_resend_otp" />
         <activity
             android:name=".FoodExHome"
-            android:label="@string/title_activity_food_ex_home" >
-        </activity>
+            android:label="@string/title_activity_food_ex_home" />
         <activity
             android:name=".NavigationDrawer"
-            android:label="@string/title_activity_drawer_check" >
-        </activity>
+            android:label="@string/title_activity_drawer_check" />
         <activity
             android:name=".ImageViewer"
-            android:label="@string/title_activity_image_viewer" >
-        </activity>
+            android:label="@string/title_activity_image_viewer" />
+        <activity
+            android:name=".Plan1"
+            android:label="@string/title_activity_plan1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Breakfast"
+            android:label="@string/title_activity_breakfast" />
+        <activity
+            android:name=".Lunch"
+            android:label="@string/title_activity_lunch" />
+        <activity
+            android:name=".Dinner"
+            android:label="@string/title_activity_dinner" />
+        <activity
+            android:name=".Plan1DatePicker"
+            android:label="@string/title_activity_plan1_date_picker"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Plan2"
+            android:label="@string/title_activity_plan3"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SampleCart"
+            android:label="@string/title_activity_sample_cart"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SignUpAddress"
+            android:label="@string/title_activity_sign_up_address"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SignUpAddressInfo"
+            android:label="@string/title_activity_sign_up_address_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HomeImageViewer"
+            android:label="@string/title_activity_home_image_viewer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Fragment1"
+            android:label="@string/title_activity_fragment1"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

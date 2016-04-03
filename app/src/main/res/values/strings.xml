@@ -19,14 +19,14 @@
     </string-array>
 
     <string-array name="area_array">
-        <item>Select Area</item>
+        <!--<item>Select Area</item>-->
         <item>Medavakkam</item>
         <item>Pallikaranai</item>
         <item>Thoraipakkam</item>
     </string-array>
 
     <string-array name="state_array">
-        <item>Select State</item>
+        <!--<item>Select State</item>-->
         <item>TamilNadu</item>
         <item>Karnataka</item>
         <item>Andhra Pradesh</item>
@@ -35,9 +35,13 @@
     <string name="title_activity_sample_check">SampleCheck</string>
     <string name="title_activity_drawer_check">DrawerCheck</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Home</string>
+    <string name="title_section2">My Account</string>
+    <string name="title_section3">My Orders</string>
+    <string name="title_section4">Contact Us</string>
+    <string name="title_section5">About US</string>
+    <string name="title_section6">Legal</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -50,5 +54,16 @@
     <string name="title_activity_nnn">NNN</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_image_viewer">ImageViewer</string>
+    <string name="title_activity_plan1">Plan1</string>
+    <string name="title_activity_breakfast">Breakfast</string>
+    <string name="title_activity_lunch">Lunch</string>
+    <string name="title_activity_dinner">Dinner</string>
+    <string name="title_activity_plan1_date_picker">Plan1DatePicker</string>
+    <string name="title_activity_plan3">Plan3</string>
+    <string name="title_activity_sample_cart">SampleCart</string>
+    <string name="title_activity_sign_up_address">SignUpAddress</string>
+    <string name="title_activity_sign_up_address_info">SignUpAddressInfo</string>
+    <string name="title_activity_home_image_viewer">HomeImageViewer</string>
+    <string name="title_activity_fragment1">Fragment1</string>
 
 </resources>

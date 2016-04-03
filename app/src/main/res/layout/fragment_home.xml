@@ -1,0 +1,806 @@
+<!--<?xmlns:app="http://schemas.android.com/apk/res-auto"?>-->
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:padding="0dp"
+            android:fillViewport="false">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f2f2f2"
+        tools:context="user.com.foodexuserui.NavigationDrawer$HomeFragment" >
+
+        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/GridLayoutLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="1"
+            android:rowCount="3"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            tools:context=".GridXMLActivity" >
+
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/carouselView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:fillColor="#FFFFFFFF"
+                app:pageColor="#00000000"
+                app:radius="3dp"
+                app:slideInterval="5000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp"/>
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/GridLayoutBreakfastImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:rowCount="2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/background_light"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                tools:context=".GridXMLActivity" >
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout android:layout_width="374dp"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="125dp"
+                        android:layout_height="match_parent"
+                        android:text="BreakFast"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingLeft="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:id="@+id/bfText"
+                        android:fontFamily="sans-serif-thin"
+                        android:textSize="23dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true" />
+
+                    <TextView
+                        android:layout_width="90dp"
+                        android:layout_height="match_parent"
+                        android:text="View All"
+                        android:layout_gravity="right"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:textStyle="bold"
+                        android:id="@+id/bfSeeAll"
+                        android:fontFamily="sans-serif-thin"
+                        android:textSize="15dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:id="@+id/LL1"
+                        android:background="#f2f2f2"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    </LinearLayout>
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="#f2f2f2"
+                        android:id="@+id/horizontalScrollViewBF"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" >
+
+                        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/GridLayoutTemp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="5"
+                            android:rowCount="3"
+                            android:paddingBottom="5dp"
+                            android:orientation="horizontal"
+                            tools:context=".GridXMLActivity" />
+
+                    </HorizontalScrollView>
+
+                </ScrollView>
+
+            </GridLayout>
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/GridLayoutLunchImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:rowCount="2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/background_light"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                tools:context=".GridXMLActivity" >
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout android:layout_width="374dp"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="125dp"
+                            android:layout_height="50dp"
+                            android:text="Lunch"
+                            android:layout_gravity="left"
+                            android:paddingLeft="10dp"
+                            android:textColor="@android:color/secondary_text_light"
+                            android:id="@+id/lnText"
+                            android:fontFamily="sans-serif-thin"
+                            android:textSize="23dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true" />
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:text="View All"
+                            android:layout_gravity="right"
+                            android:paddingTop="5dp"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:textStyle="bold"
+                            android:id="@+id/lnSeeAll"
+                            android:fontFamily="sans-serif-thin"
+                            android:textSize="15dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:id="@+id/LL2"
+                        android:background="#f2f2f2"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="#f2f2f2"
+                        android:id="@+id/horizontalScrollViewLN"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" >
+
+                        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/GridLayoutTemp2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="5"
+                            android:rowCount="3"
+                            android:paddingBottom="5dp"
+                            android:orientation="horizontal"
+                            tools:context=".GridXMLActivity" />
+
+                    </HorizontalScrollView>
+
+                </ScrollView>
+
+            </GridLayout>
+
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/GridLayoutDinnerImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:rowCount="2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/background_light"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                tools:context=".GridXMLActivity" >
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout android:layout_width="374dp"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="125dp"
+                            android:layout_height="50dp"
+                            android:text="Dinner"
+                            android:layout_gravity="left"
+                            android:paddingLeft="10dp"
+                            android:textColor="@android:color/secondary_text_light"
+                            android:id="@+id/dnText"
+                            android:fontFamily="sans-serif-thin"
+                            android:textSize="23dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true" />
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:text="View All"
+                            android:layout_gravity="right"
+                            android:paddingTop="5dp"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:textStyle="bold"
+                            android:id="@+id/dnSeeAll"
+                            android:fontFamily="sans-serif-thin"
+                            android:textSize="15dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:id="@+id/LL3"
+                        android:background="#f2f2f2"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="#f2f2f2"
+                        android:id="@+id/horizontalScrollViewDN"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" >
+
+                        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/GridLayoutTemp3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="5"
+                            android:rowCount="3"
+                            android:paddingBottom="5dp"
+                            android:orientation="horizontal"
+                            tools:context=".GridXMLActivity" />
+
+                    </HorizontalScrollView>
+
+                </ScrollView>
+
+            </GridLayout>
+
+
+
+
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/GridLayoutAddOnImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:rowCount="2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/background_light"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                tools:context=".GridXMLActivity" >
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout android:layout_width="374dp"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="125dp"
+                            android:layout_height="50dp"
+                            android:text="Add Ons"
+                            android:layout_gravity="left"
+                            android:paddingLeft="10dp"
+                            android:textColor="@android:color/secondary_text_light"
+                            android:id="@+id/AddOnText"
+                            android:fontFamily="sans-serif-thin"
+                            android:textSize="23dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true" />
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:text="View All"
+                            android:layout_gravity="right"
+                            android:paddingTop="5dp"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:textStyle="bold"
+                            android:id="@+id/AddOnSeeAll"
+                            android:fontFamily="sans-serif-thin"
+                            android:textSize="15dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:id="@+id/LL4"
+                        android:background="#f2f2f2"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="#f2f2f2"
+                        android:id="@+id/horizontalScrollViewAddOn"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" >
+
+                        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/GridLayoutTemp4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="5"
+                            android:rowCount="3"
+                            android:paddingBottom="5dp"
+                            android:orientation="horizontal"
+                            tools:context=".GridXMLActivity" />
+
+                    </HorizontalScrollView>
+
+                </ScrollView>
+
+            </GridLayout>
+
+
+
+
+
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/GridLayoutComboImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:rowCount="2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/background_light"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                tools:context=".GridXMLActivity" >
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout android:layout_width="374dp"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="125dp"
+                            android:layout_height="50dp"
+                            android:text="Combos"
+                            android:layout_gravity="left"
+                            android:paddingLeft="10dp"
+                            android:textColor="@android:color/secondary_text_light"
+                            android:id="@+id/ComboText"
+                            android:fontFamily="sans-serif-thin"
+                            android:textSize="23dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true" />
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:text="View All"
+                            android:layout_gravity="right"
+                            android:paddingTop="5dp"
+                            android:textColor="@android:color/holo_blue_bright"
+                            android:textStyle="bold"
+                            android:id="@+id/ComboSeeAll"
+                            android:fontFamily="sans-serif-thin"
+                            android:textSize="15dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:id="@+id/LL5"
+                        android:background="#f2f2f2"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="#f2f2f2"
+                        android:id="@+id/horizontalScrollViewCombo"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" >
+
+                        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/GridLayoutTemp5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="5"
+                            android:rowCount="3"
+                            android:paddingBottom="5dp"
+                            android:orientation="horizontal"
+                            tools:context=".GridXMLActivity" />
+
+                    </HorizontalScrollView>
+
+                </ScrollView>
+
+            </GridLayout>
+
+
+
+            <!--<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/GridLayoutLunchImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:rowCount="1"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                tools:context=".GridXMLActivity" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lunch"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/lnText"
+                    android:fontFamily="sans-serif-thin"
+                    android:textSize="23dp" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="#f2f2f2"
+                        android:id="@+id/horizontalScrollViewLN"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" >
+
+                        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/GridLayoutTemp2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="5"
+                            android:rowCount="3"
+                            android:orientation="horizontal"
+                            tools:context=".GridXMLActivity" />
+
+                    </HorizontalScrollView>
+
+                </ScrollView>
+
+            </GridLayout>
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/GridLayoutDinnerImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:rowCount="1"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                tools:context=".GridXMLActivity" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dinner"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/dnText"
+                    android:fontFamily="sans-serif-thin"
+                    android:textSize="23dp" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="#f2f2f2"
+                        android:id="@+id/horizontalScrollViewDN"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" >
+
+                        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/GridLayoutTemp3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="5"
+                            android:rowCount="3"
+                            android:orientation="horizontal"
+                            tools:context=".GridXMLActivity" />
+
+                    </HorizontalScrollView>
+
+                </ScrollView>
+
+            </GridLayout>
+-->
+
+   <!--         <Button
+                android:id="@+id/plan1btn"
+                android:background="@drawable/plan1"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:onClick="myMethod" android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"
+                android:text="1 Day Plan" />
+
+            <Button
+                android:id="@+id/plan2btn"
+                android:background="@drawable/plan1"
+                android:layout_margin="10dp"
+                android:onClick="myMethod" android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"
+                android:text="2 Day Plan" />
+
+            <Button
+                android:id="@+id/plan5btn"
+                android:background="@drawable/plan1"
+                android:onClick="myMethod" android:visibility="invisible"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"
+                android:text="5 Day Plan" />
+
+            <Button
+                android:id="@+id/plan7btn"
+                android:background="@drawable/plan1"
+                android:onClick="myMethod" android:visibility="invisible"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"
+                android:text="7 Day Plan" />
+-->
+            <!--
+
+
+
+                <ImageButton
+                    android:id="@+id/plan2btn"
+                    android:src="@drawable/plan1"
+                    android:onClick="myMethod"
+                    android:layout_width="170dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/image_bg"
+                    android:layout_below="@+id/plans"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2 Day Plan"
+                    android:id="@+id/day2"
+                    android:textColor="@android:color/primary_text_dark_nodisable"
+                    android:textSize="30dp"
+                    android:layout_alignTop="@+id/day1"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignLeft="@+id/day7"
+                    android:layout_alignStart="@+id/day7" />
+
+                <ImageButton
+                    android:id="@+id/plan5btn"
+                    android:src="@drawable/plan1"
+                    android:onClick="myMethod"
+                    android:layout_width="170dp"
+                    android:layout_height="180dp"
+                    android:background="@drawable/image_bg"
+                    android:layout_alignTop="@+id/plan7btn"
+                    android:layout_alignLeft="@+id/plan1btn"
+                    android:layout_alignStart="@+id/plan1btn" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 5 Day Plan"
+                    android:id="@+id/day5"
+                    android:textColor="@android:color/primary_text_dark_nodisable"
+                    android:textSize="30dp"
+                    android:paddingRight="5dp"
+                    android:layout_alignBottom="@+id/plan5btn"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <ImageButton
+                    android:id="@+id/plan7btn"
+                    android:src="@drawable/plan1"
+                    android:onClick="myMethod"
+                    android:layout_width="170dp"
+                    android:layout_height="180dp"
+                    android:tag="kxjksdf;lsdf"
+                    android:background="@drawable/image_bg"
+                    android:layout_below="@+id/plan2btn"
+                    android:layout_alignLeft="@+id/plan2btn"
+                    android:layout_alignStart="@+id/plan2btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7 Day Plan"
+                    android:id="@+id/day7"
+                    android:textColor="@android:color/primary_text_dark_nodisable"
+                    android:textSize="30dp"
+                    android:paddingRight="5dp"
+                    android:layout_alignTop="@+id/day5"
+                    android:layout_alignRight="@+id/plan7btn"
+                    android:layout_alignEnd="@+id/plan7btn" />
+
+            -->
+
+            <!--<Button android:layout_height="wrap_content"
+                android:layout_width="@android:dimen/thumbnail_width"
+                android:id="@+id/plan1btn"
+                android:text="1 Day Plan"
+                android:onClick="myMethod"
+                android:layout_marginTop="43dp"
+                android:layout_below="@+id/plans"
+                android:layout_centerHorizontal="true"/>-->
+
+            <!--<Button android:layout_height="wrap_content"
+                android:layout_width="@android:dimen/thumbnail_width"
+                android:id="@+id/plan2btn"
+                android:text="2 Day Plan"
+                android:onClick="myMethod"
+                android:layout_marginTop="43dp"
+                android:layout_below="@+id/plan1btn"
+                android:layout_centerHorizontal="true"/>-->
+
+            <!--<Button android:layout_height="wrap_content"
+                android:layout_width="@android:dimen/thumbnail_width"
+                android:id="@+id/plan5btn"
+                android:text="5 Day Plan"
+                android:onClick="myMethod"
+                android:layout_marginTop="43dp"
+                android:layout_below="@+id/plan2btn"
+                android:layout_centerHorizontal="true"/>-->
+
+            <!--<Button android:layout_height="wrap_content"
+                android:layout_width="@android:dimen/thumbnail_width"
+                android:id="@+id/plan7btn"
+                android:text="7 Day Plan"
+                android:onClick="myMethod"
+                android:layout_marginTop="43dp"
+                android:layout_below="@+id/plan5btn"
+                android:layout_centerHorizontal="true"/>-->
+
+        </GridLayout>
+    </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

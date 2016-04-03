@@ -17,7 +17,7 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/OTP"
-            android:background="#79818181"
+            android:background="#FAFAFA"
             android:minHeight="40dp"
             style="@android:style/Widget.DeviceDefault.EditText"
             android:hint="Enter OTP"

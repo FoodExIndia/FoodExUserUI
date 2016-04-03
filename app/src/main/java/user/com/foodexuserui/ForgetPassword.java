@@ -49,7 +49,7 @@ public class ForgetPassword extends AppCompatActivity {
                             StrictMode.setThreadPolicy(policy);
                             HttpHelper helper = new HttpHelper();
 
-                            response = helper.get("sendotp?loginId="+phoneBean);
+                            response = helper.get(("sendotp?loginId="+phoneBean),ForgetPassword.this);
                             String responseString = new BasicResponseHandler().handleResponse(response);
 
                             if(responseString.equalsIgnoreCase("success")) {

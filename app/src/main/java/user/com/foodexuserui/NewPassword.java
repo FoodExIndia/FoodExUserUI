@@ -69,7 +69,7 @@ public class NewPassword extends AppCompatActivity {
                         StrictMode.setThreadPolicy(policy);
 
                         HttpHelper helper = new HttpHelper();
-                        response = helper.get("newpassword?password="+newPassword.getText().toString()+"");
+                        response = helper.get(("newpassword?password="+newPassword.getText().toString()+""),NewPassword.this);
                         String responseString = new BasicResponseHandler().handleResponse(response);
                         System.out.println("Response Status:" + responseString);
                         if(responseString.equalsIgnoreCase("success") )

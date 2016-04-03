@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="user.com.foodexuserui.Plan2">
+    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/action_prev2"
+        android:icon="@drawable/prev"
+        android:title="previous Date"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_next2"
+        android:icon="@drawable/next"
+        android:title="next Date"
+        app:showAsAction="ifRoom"/>
+
+</menu>

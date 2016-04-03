@@ -11,17 +11,26 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
+        debug {
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.0.1'
     compile files('libs/android-3.1.jar')
+    compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.google.code.gson:gson:1.7.2'
+    compile 'com.android.support:design:23.1.0'
+    compile 'com.vstechlab.easyfonts:easyfonts:1.0.0'
+    compile 'com.synnapps:carouselview:0.0.7'
+    compile 'pl.rspective.pagerdatepicker:pagerdatepicker:1.2.0'
 }

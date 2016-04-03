@@ -54,7 +54,7 @@ public class EnterOTP extends AppCompatActivity {
                         StrictMode.setThreadPolicy(policy);
                         HttpHelper helper = new HttpHelper();
 
-                        response = helper.get("sendotp?loginId="+userphoneNumber);
+                        response = helper.get(("sendotp?loginId="+userphoneNumber),EnterOTP.this);
                         String responseString = new BasicResponseHandler().handleResponse(response);
 
                         if(responseString.equalsIgnoreCase("success")) {
@@ -91,12 +91,12 @@ public class EnterOTP extends AppCompatActivity {
                         StrictMode.setThreadPolicy(policy);
                         HttpHelper helper = new HttpHelper();
 
-                        response = helper.get("otp?loginId="+userphoneNumber.getText().toString()+"&otp=" + OTPvalue.getText().toString() + "");
+                        response = helper.get(("otp?loginId="+userphoneNumber.getText().toString()+"&otp=" + OTPvalue.getText().toString() + ""),EnterOTP.this);
                         String responseString = new BasicResponseHandler().handleResponse(response);
                         System.out.println("Response Status:" + responseString);
                         if (responseString.equalsIgnoreCase("success")) {
                             if (getIntent().getStringExtra("from").equalsIgnoreCase("SignUp")) {
-                                Intent i = new Intent(EnterOTP.this, FoodExHome.class);
+                                Intent i = new Intent(EnterOTP.this, NavigationDrawer.class);
                                 startActivity(i);
                             } else if (getIntent().getStringExtra("from").equalsIgnoreCase("ForgetPassword")) {
                                 Intent i = new Intent(EnterOTP.this, NewPassword.class);

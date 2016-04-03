@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0"?>
 
     <LinearLayout tools:context=".MainActivity"
@@ -20,18 +21,39 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <EditText android:layout_height="wrap_content"
+        <ImageView android:layout_height="@android:dimen/thumbnail_height"
+            android:layout_width="wrap_content"
+            android:src="@drawable/img_icon_1"
+            android:id="@+id/foodExLogo"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/TC"
+            android:layout_alignStart="@+id/TC"
+            android:layout_above="@+id/foodExText"
+            android:layout_alignRight="@+id/forgotpwd"
+            android:layout_alignEnd="@+id/forgotpwd" />
+
+        <ImageView android:layout_height="@dimen/abc_dialog_fixed_height_minor"
+            android:layout_width="match_parent"
+            android:src="@drawable/foodex_text"
+            android:id="@+id/foodExText"
+            android:layout_alignRight="@+id/password"
+            android:layout_alignEnd="@+id/password"
+            android:layout_above="@+id/Username" />
+
+
+        <EditText android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="#79818181"
+        android:background="#FAFAFA"
         android:id="@+id/Username"
-        android:inputType="text"
+        android:inputType="number"
         android:minHeight="50dp"
         android:editable="true"
         android:contextClickable="true"
-        android:hint="UserName"
+        android:hint="Mobile Number"
         android:clickable="true"
+        android:maxLength="10"
         style="@android:style/Widget.DeviceDefault.EditText"
-        android:textColor="#010101"
+        android:textColor="#010101" android:textColorHint="#4dff4d"
         android:layout_above="@+id/password"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -41,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:background="#79818181"
+        android:background="#FAFAFA"
         android:id="@+id/password"
         android:inputType="textPassword"
         android:minHeight="50dp"
@@ -49,6 +71,7 @@
         android:contextClickable="true"
         android:clickable="true"
         android:hint="Password"
+        android:textColorHint="#4dff4d"
         style="@style/Widget.AppCompat.EditText"
         android:layout_centerVertical="true"
         android:maxHeight="50dp"
@@ -59,12 +82,10 @@
         android:layout_width="@android:dimen/thumbnail_width"
         android:id="@+id/loginbtn"
         android:text="Login"
-        android:layout_marginTop="43dp"
         android:layout_below="@+id/password"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
-    <TextView android:layout_height="wrap_content"
+    &lt;!&ndash;<TextView android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/forgotPasswordLabel"
         android:textSize="50sp"
@@ -72,27 +93,32 @@
         android:textColor="#ba15f97d"
         android:text="FoodEX"
         android:textAlignment="center"
-        android:paddingLeft="100dp"/>
+        android:paddingLeft="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/Username"
+        android:layout_alignStart="@+id/Username" />&ndash;&gt;
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SignUp"
             android:id="@+id/signupbtn"
-            android:layout_alignBottom="@+id/loginbtn"
-            android:layout_toRightOf="@+id/loginbtn"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_above="@+id/TC"
+            android:layout_alignLeft="@+id/forgotpwd"
+            android:layout_alignStart="@+id/forgotpwd"
+            android:layout_alignRight="@+id/foodExLogo"
+            android:layout_alignEnd="@+id/foodExLogo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Forgot Password ??"
             android:id="@+id/forgotpwd"
-            android:layout_below="@+id/loginbtn"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="47dp"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_alignBaseline="@+id/signupbtn"
+            android:layout_alignBottom="@+id/signupbtn"
+            android:layout_alignLeft="@+id/loginbtn"
+            android:layout_alignStart="@+id/loginbtn" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,10 +132,135 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/errormsg"
-            android:layout_above="@+id/signupbtn"
+            android:layout_above="@+id/loginbtn"
             android:layout_centerHorizontal="true"
             android:textSize="15dp" />
 
+
     </RelativeLayout>
 
-</LinearLayout>
+</LinearLayout>-->
+
+<LinearLayout tools:context=".MainActivity"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/GridLayoutLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="1"
+        android:rowCount="8"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        tools:context=".GridXMLActivity" >
+
+        <ImageView android:layout_height="@android:dimen/thumbnail_height"
+            android:layout_width="wrap_content"
+            android:src="@drawable/img_icon_1"
+            android:id="@+id/foodExLogo" />
+
+        <EditText android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="#FAFAFA"
+            android:id="@+id/Username"
+            android:inputType="number"
+            android:minHeight="50dp"
+            android:editable="true"
+            android:contextClickable="true"
+            android:hint="Mobile Number"
+            android:clickable="true"
+            android:maxLength="10"
+            android:drawableLeft="@drawable/mobile_hint"
+            android:shadowColor="@android:color/darker_gray"
+            style="@android:style/Widget.DeviceDefault.EditText"
+            android:textColor="#010101"
+            android:layout_margin="5dp"/>
+
+        <EditText android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="#FAFAFA"
+            android:id="@+id/password"
+            android:drawableLeft="@drawable/password_hint"
+            android:inputType="textPassword"
+            android:minHeight="50dp"
+            android:editable="true"
+            android:contextClickable="true"
+            android:clickable="true"
+            android:hint="Password"
+            android:maxHeight="50dp"
+            android:ems="10"
+            style="@android:style/Widget.DeviceDefault.EditText"
+            android:shadowColor="@android:color/darker_gray"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/errormsg"
+            android:textSize="15dp" />
+
+        <Button android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/loginbtn"
+            android:text="Login"
+            android:background="#28dc09"
+            android:textAllCaps="true"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/white"
+            android:layout_below="@+id/password" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password ??"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:id="@+id/forgotpwd"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SignUp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textAllCaps="true"
+            android:background="#28dc09"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/signupbtn"
+            android:layout_above="@+id/TC" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Terms &amp; Conditions"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:id="@+id/TC" />
+
+    </GridLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>

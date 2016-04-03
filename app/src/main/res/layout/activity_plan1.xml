@@ -1,0 +1,254 @@
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+id/plan1Layout"
+    android:background="#f2f2f2"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/logo_white"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/materialviewpager_logoHeight"
+        android:text="Material is Good"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"/>
+
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/GridLayoutPlan1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="1"
+        android:rowCount="2"
+        android:orientation="horizontal"
+        tools:context=".GridXMLActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/LL1">-->
+
+<!--
+
+-->
+
+        <!--<TabHost
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tabHost2"
+            android:layout_centerHorizontal="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TabWidget
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></TabWidget>
+
+                <FrameLayout
+                    android:id="@+id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/plan1"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">Tab1</LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">Tab2</LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/plan1"
+                        android:orientation="vertical">Tab3</LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="410dp"
+            android:layout_gravity="center_horizontal|bottom">
+
+            <android.support.v4.app.FragmentTabHost
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/tabhost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:background="#ffffff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></TabWidget>
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <FrameLayout
+                        android:id="@+id/realFrameLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"></LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"></LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"></LinearLayout>
+                    </FrameLayout>
+
+                </LinearLayout>
+            </android.support.v4.app.FragmentTabHost>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal|top">
+
+            <pl.rspective.pagerdatepicker.view.DateRecyclerView
+                android:id="@+id/date_list"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#ff343434"
+                android:onClick="onDatePickerItemClick"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pagerDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/date_list"/>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>
+
+
+<!--
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/LL1"
+        android:id="@+id/LL2">
+
+    <pl.rspective.pagerdatepicker.view.DateRecyclerView
+        android:id="@+id/date_list"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#ff343434"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pagerDate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/date_list"/>
+
+        <user.com.commons.CustomViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/pager1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/titles"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />
+
+    </RelativeLayout>
+
+    </GridLayout>
+
+-->
+    <!--
+        <EditText android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="#FAFAFA"
+            android:id="@+id/plan1DatePicker"
+            android:inputType="text"
+            android:minHeight="40dp"
+            android:focusable="false"
+            android:editable="true"
+            android:contextClickable="true"
+            android:gravity="center"
+            android:hint="Select Date"
+            android:clickable="true"
+            style="@android:style/Widget.DeviceDefault.EditText"
+            android:textColor="#010101" />
+    -->
+
+    <!--<Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text= "&lt;&lt;"
+        android:id="@+id/prevDate"
+        android:enabled="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="&gt;&gt;"
+        android:icon="@drawable/next"
+        android:id="@+id/nextDate"
+        android:enabled="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
+
+        -->

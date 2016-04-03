@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_gravity="fill_horizontal"
+    android:layout_height="match_parent">
+
+    <pl.rspective.pagerdatepicker.view.DateRecyclerView
+        android:id="@+id/date_listTemp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#ff343434"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pagerDateTemp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/date_listTemp"/>
+
+</RelativeLayout>

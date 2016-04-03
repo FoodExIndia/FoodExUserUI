@@ -1,11 +1,19 @@
 package user.com.foodexuserui;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import user.com.Entities.MenuBean;
 
 public class TermsConditions extends AppCompatActivity {
 
@@ -18,6 +26,7 @@ public class TermsConditions extends AppCompatActivity {
         actionBar.setIcon(R.drawable.notification);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override
