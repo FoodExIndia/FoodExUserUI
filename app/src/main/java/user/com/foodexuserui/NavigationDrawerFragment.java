@@ -1,5 +1,6 @@
 package user.com.foodexuserui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
@@ -26,6 +27,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import static user.com.foodexuserui.R.drawable.food;
+import static user.com.foodexuserui.R.drawable.icon_contact;
+import static user.com.foodexuserui.R.drawable.icon_home;
+import static user.com.foodexuserui.R.drawable.icon_legal;
 import static user.com.foodexuserui.R.drawable.img_logout;
 import static user.com.foodexuserui.R.drawable.img_orders;
 import static user.com.foodexuserui.R.drawable.img_profile;
@@ -60,6 +64,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
+    private View mDrawer;
     private View mFragmentContainerView;
 
     private int mCurrentSelectedPosition = 0;
@@ -107,25 +112,59 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_layout, container, false);
+        mDrawer = (LinearLayout) inflater.inflate(R.layout.fragment_layout, container, false);
+        mDrawerListView = (ListView)mDrawer.findViewById(R.id.drawerListView);
+
+        //mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_layout, container, false);
+
         mDrawerListView
                 .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
                         if (position == 0) {
-                            images[0] = img_profile;
-                            images[1] = img_orders;
-                            images[2] = img_logout;
+                            images[0] = icon_home;
+                            images[1] = img_profile;
+                            images[2] = icon_contact;
+                            images[3] = img_profile;
+                            images[4] = icon_legal;
+                            images[5] = img_logout;
                         } else if (position == 1) {
-                            images[0] = img_profile;
-                            images[1] = img_orders;
-                            images[2] = img_logout;
+                            images[0] = icon_home;
+                            images[1] = img_profile;
+                            images[2] = icon_contact;
+                            images[3] = img_profile;
+                            images[4] = icon_legal;
+                            images[5] = img_logout;
                         } else if (position == 2) {
-                            images[0] = img_profile;
+                            images[0] = icon_home;
+                            images[1] = img_profile;
+                            images[2] = icon_contact;
+                            images[3] = img_profile;
+                            images[4] = icon_legal;
+                            images[5] = img_logout;
+                        }
+                        if (position == 3) {
+                            images[0] = icon_home;
+                            images[1] = img_profile;
+                            images[2] = icon_contact;
+                            images[3] = img_profile;
+                            images[4] = icon_legal;
+                            images[5] = img_logout;
+                        } else if (position == 4) {
+                            images[0] = icon_home;
+                            images[1] = img_profile;
+                            images[2] = icon_contact;
+                            images[3] = img_profile;
+                            images[4] = icon_legal;
+                            images[5] = img_logout;
+                        } else if (position == 5) {
+                            /*images[0] = img_profile;
                             images[1] = img_orders;
                             images[2] = img_logout;
+                            images[4] = img_profile;
+                            images[5] = img_orders;
+                            images[6] = img_logout;*/
                         }
                         selectedposition[0] = position;
                         mMyDrawerAdapter.notifyDataSetChanged();
@@ -134,10 +173,9 @@ public class NavigationDrawerFragment extends Fragment {
                 });
 
         titles = new String[] { getString(R.string.title_section1),
-                getString(R.string.title_section2),
-                getString(R.string.title_section3) };
-        images = new int[] { img_profile, img_orders,
-                img_logout };
+                getString(R.string.title_section2),getString(R.string.title_section3),"About Us","Legal","Logout"};
+        images = new int[] { icon_home, img_profile,
+                icon_contact,img_profile, icon_legal, img_logout };
         selectedposition = new int[] { mCurrentSelectedPosition };
 
         mMyDrawerAdapter = new MyDrawerAdapter(getActivity(), titles, images,
@@ -146,7 +184,8 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         mDrawerListView.setDividerHeight(10);
         mDrawerListView.setCacheColorHint(Color.BLACK);
-        return mDrawerListView;
+
+        return mDrawer;
     }
 
     public boolean isDrawerOpen() {

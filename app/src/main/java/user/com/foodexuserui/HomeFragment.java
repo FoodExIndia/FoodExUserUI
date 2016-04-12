@@ -141,11 +141,16 @@ public class HomeFragment extends Fragment {
 
         for (int j = 0; j < breakfastlist.size(); j++) {
 
+            final View rowView;
+            rowView = inflater.inflate(R.layout.sample_horizontal_design, container, false);
+
+            if (j < breakfastlist.size()) {
+
             final String foodItemName = breakfastlist.get(j).getItemName();
             final double foodPrice = breakfastlist.get(j).getItemPrice();
 
-            final byte[] foodImage = breakfastlist.get(j).getFoodImage();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(foodImage,0,foodImage.length);
+            //final byte[] foodImage = breakfastlist.get(j).getFoodImage();
+            //Bitmap bitmap = BitmapFactory.decodeByteArray(foodImage,0,foodImage.length);
 
             final SubOrderBean bfbean = new SubOrderBean();
             bfbean.setFoodKey(breakfastlist.get(j).getFoodKey());
@@ -159,27 +164,23 @@ public class HomeFragment extends Fragment {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.clear();
                 editor.commit();
-            }
 
-            //If value already present in shared preference from dinner or lunch page, add that to the suborderList of this page
-            /*if (suborderJson != null) {
+                //If value already present in shared preference from dinner or lunch page, add that to the suborderList of this page
                 List<SubOrderBean> l = new ArrayList<SubOrderBean>();
                 Type listTypeSubOrder = new TypeToken<ArrayList<SubOrderBean>>() {
                 }.getType();
                 l = new Gson().fromJson(suborderJson, listTypeSubOrder);
                 bfSuborderList.addAll(l);
-            }*/
 
-            final View rowView;
-                rowView = inflater.inflate(R.layout.sample_horizontal_design, container, false);
+            }
 
                 TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
                 ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
                 TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
 
                 txtTitle.setText(foodItemName);
-                //imageView.setImageResource(R.drawable.food);
-                imageView.setImageBitmap(bitmap);
+                imageView.setImageResource(R.drawable.food);
+                //imageView.setImageBitmap(bitmap);
                 extratxt.setText("₹ " + (String.format("%.2f", foodPrice)));
 
                 imageView.setOnClickListener(new View.OnClickListener() {
@@ -204,46 +205,86 @@ public class HomeFragment extends Fragment {
 
         }
 
+        if (j == breakfastlist.size()) {
+
+            layoutBFTemp.addView(getViewAll(rowView,"Breakfast"));
+
+        }
+
+        }
+
         final GridLayout layoutLNTemp = (GridLayout)rootView.findViewById(R.id.GridLayoutTemp2);
 
-        for (int j = 0; j < breakfastlist.size(); j++) {
-
-            final String foodItemName = breakfastlist.get(j).getItemName();
-            final double foodPrice = breakfastlist.get(j).getItemPrice();
+        for (int j = 0; j <= breakfastlist.size(); j++) {
 
             final View rowView;
             rowView = inflater.inflate(R.layout.sample_horizontal_design, container, false);
 
-            TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
-            ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-            TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
+            if (j < breakfastlist.size()) {
 
-            txtTitle.setText(foodItemName);
-            imageView.setImageResource(R.drawable.food);
-            extratxt.setText("₹ " + (String.format("%.2f", foodPrice)));
+                final String foodItemName = breakfastlist.get(j).getItemName();
+                final double foodPrice = breakfastlist.get(j).getItemPrice();
 
-            imageView.setOnClickListener(new View.OnClickListener() {
-                                             @Override
-                                             public void onClick(View v) {
-                                                 Intent myIntent = new Intent(v.getContext(), Plan1.class);
-                                                 startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Lunch").putExtra("itemPrice",String.format("%.2f", foodPrice)).putExtra("SeeAll","Yes"));
+                final SubOrderBean lnbean = new SubOrderBean();
+                lnbean.setFoodKey(breakfastlist.get(j).getFoodKey());
+                lnbean.setCourseFlag(1);
+                lnbean.setFoodName(foodItemName);
+                lnbean.setFoodQuantity(1);
+
+                TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
+                ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+                TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
+
+                txtTitle.setText(foodItemName);
+                imageView.setImageResource(R.drawable.food);
+                extratxt.setText("₹ " + (String.format("%.2f", foodPrice)));
+
+                imageView.setOnClickListener(new View.OnClickListener() {
+                                                 @Override
+                                                 public void onClick(View v) {
+                                                     SharedPreferences.Editor editor = prefs.edit();
+                                                     editor.clear();
+                                                     editor.commit();
+                                                     subOrderBeanList.clear();
+                                                     subOrderBeanList.add(lnbean);
+                                                     SharedPreferences.Editor itemsEditor = prefs.edit();
+                                                     itemsEditor.putString("SubOrderList", new Gson().toJson(subOrderBeanList));
+                                                     itemsEditor.commit();
+                                                     Intent myIntent = new Intent(v.getContext(), Plan1.class);
+                                                     startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Lunch").putExtra("itemPrice", String.format("%.2f", foodPrice)).putExtra("SeeAll", "No"));
+                                                 }
                                              }
-                                         }
-            );
+                );
 
-            layoutLNTemp.addView(rowView);
+                layoutLNTemp.addView(rowView);
 
+            }
+
+            if (j == breakfastlist.size()) {
+
+                layoutLNTemp.addView(getViewAll(rowView,"Lunch"));
+
+            }
         }
+
 
         final GridLayout layoutDNTemp = (GridLayout)rootView.findViewById(R.id.GridLayoutTemp3);
 
         for (int j = 0; j < breakfastlist.size(); j++) {
 
+            final View rowView;
+            rowView = inflater.inflate(R.layout.sample_horizontal_design, container, false);
+
+            if (j < breakfastlist.size()) {
+
             final String foodItemName = breakfastlist.get(j).getItemName();
             final double foodPrice = breakfastlist.get(j).getItemPrice();
 
-            final View rowView;
-            rowView = inflater.inflate(R.layout.sample_horizontal_design, container, false);
+            final SubOrderBean dnbean = new SubOrderBean();
+            dnbean.setFoodKey(breakfastlist.get(j).getFoodKey());
+            dnbean.setCourseFlag(1);
+            dnbean.setFoodName(foodItemName);
+            dnbean.setFoodQuantity(1);
 
             TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
             ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
@@ -256,13 +297,29 @@ public class HomeFragment extends Fragment {
             imageView.setOnClickListener(new View.OnClickListener() {
                                              @Override
                                              public void onClick(View v) {
+                                                 SharedPreferences.Editor editor = prefs.edit();
+                                                 editor.clear();
+                                                 editor.commit();
+                                                 subOrderBeanList.clear();
+                                                 subOrderBeanList.add(dnbean);
+                                                 SharedPreferences.Editor itemsEditor = prefs.edit();
+                                                 itemsEditor.putString("SubOrderList", new Gson().toJson(subOrderBeanList));
+                                                 itemsEditor.commit();
                                                  Intent myIntent = new Intent(v.getContext(), Plan1.class);
                                                  startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Dinner").putExtra("itemPrice", String.format("%.2f", foodPrice)).putExtra("SeeAll","No"));
                                              }
                                          }
             );
 
-            layoutDNTemp.addView(rowView);
+        layoutDNTemp.addView(rowView);
+
+    }
+
+    if (j == breakfastlist.size()) {
+
+        layoutDNTemp.addView(getViewAll(rowView,"Lunch"));
+
+    }
 
         }
 
@@ -538,6 +595,29 @@ public class HomeFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         ((NavigationDrawer) activity).onSectionAttached(1);
+    }
+
+    public View getViewAll(View rowView, final String course){
+
+        TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+        TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
+
+        txtTitle.setText("View All");
+        imageView.setImageResource(R.drawable.food);
+        extratxt.setText("");
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View v) {
+                                             Intent myIntent = new Intent(v.getContext(), Plan1.class);
+                                             startActivity(myIntent.putExtra("foodItem", "").putExtra("Course", course).putExtra("itemPrice", 1.00).putExtra("SeeAll","Yes"));
+                                         }
+                                     }
+        );
+
+        return rowView;
+
     }
 
 }

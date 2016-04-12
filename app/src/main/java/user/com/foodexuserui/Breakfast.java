@@ -54,6 +54,8 @@ import java.util.List;
 import user.com.Entities.MenuBean;
 import user.com.Entities.SubOrderBean;
 
+import static android.support.v4.app.ActivityCompat.invalidateOptionsMenu;
+
 public class Breakfast extends Fragment {
 
     public Breakfast() {
@@ -111,6 +113,7 @@ public class Breakfast extends Fragment {
         rl.removeAllViews();
         final GridLayout rl1 = (GridLayout) breakfast.findViewById(R.id.GridLayoutBreakfast1);
         rl1.removeAllViews();
+        final Plan1 planCart = new Plan1();
 
         //final EditText dpDate = (EditText) plan1.findViewById(R.id.plan1DatePicker);
 
@@ -196,14 +199,14 @@ public class Breakfast extends Fragment {
         }
 
 if(SeeAll.equals("No"))
-
 {
-
     for (final SubOrderBean bean : subOrderBeanList) {
 
-        if (foodName != null && !foodName.equals("") && bean.getFoodName().equals(foodName)) {
+        //&& bean.getFoodName().equals(foodName)
 
-            String newCount = String.valueOf(bean.getFoodQuantity());
+        if (foodName != null && !foodName.equals("")) {
+
+            String itemCount = String.valueOf(bean.getFoodQuantity());
 
             final View rowView;
             rowView = inflater.inflate(R.layout.home_item_list, container, false);
@@ -220,11 +223,32 @@ if(SeeAll.equals("No"))
                                            @Override
                                            public void onClick(View v) {
 
+                                               String count = null;
+                                               int newCount = 0;
                                                Integer q = Integer.parseInt(String.valueOf(quantity.getText()));
 
                                                if (!minusBtn.isEnabled()) {
                                                    minusBtn.setEnabled(true);
                                                }
+
+                                               if(q == 0)
+                                               {
+                                                   rl1.removeView(rowView);
+                                                   rl.removeView(rowView);
+                                                   rl.addView(rowView);
+
+                                                   SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
+                                                   count = itemCountInfo.getString("countOverall", "");
+                                                   newCount = Integer.parseInt(count);
+
+                                                   SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                                   itemCounteditor.putString("countOverall", String.valueOf(newCount + 1));
+                                                   itemCounteditor.commit();
+
+                                                   planCart.refreshActionBar(getActivity());
+
+                                               }
+
                                                String newq = (++q).toString();
                                                bean.setFoodQuantity(Integer.parseInt(newq));
                                                double newPrice = Double.valueOf(foodPrice) * Double.valueOf(newq);
@@ -256,15 +280,32 @@ if(SeeAll.equals("No"))
                                             @Override
                                             public void onClick(View v) {
 
+                                                String count = null;
+                                                int newCount = 0;
                                                 Integer q = Integer.parseInt(String.valueOf(quantity.getText()));
 
                                                 if (q != 0) {
+
                                                     String newq = (--q).toString();
+
                                                     if (Integer.parseInt(newq) == 0) {
+
                                                         rl.removeView(rowView);
                                                         rl1.removeView(rowView);
                                                         rl1.addView(rowView);
+
+                                                        SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
+                                                        count = itemCountInfo.getString("countOverall", "");
+                                                        newCount = Integer.parseInt(count);
+
+                                                            SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                                            itemCounteditor.putString("countOverall", String.valueOf(newCount - 1));
+                                                            itemCounteditor.commit();
+
+                                                        planCart.refreshActionBar(getActivity());
+
                                                     }
+
                                                     double newPrice = Double.valueOf(foodPrice) * Double.valueOf(newq);
                                                     priceAmount.setText(String.valueOf(newPrice));
                                                     quantity.setText(newq);
@@ -274,13 +315,15 @@ if(SeeAll.equals("No"))
                                                     rl.removeView(rowView);
                                                     rl1.removeView(rowView);
                                                     rl1.addView(rowView);
+
                                                 }
                                             }
                                         }
             );
 
-            txtTitle.setText(foodName);
+            txtTitle.setText(bean.getFoodName());
             imageView.setImageResource(R.drawable.food);
+            quantity.setText("s");
             //byte[] blob = getBlob("");
             //Bitmap bitmap = BitmapFactory.decodeByteArray()
             //imageView.setImageBitmap(bitmap);
@@ -305,8 +348,9 @@ if(SeeAll.equals("No"))
 
             for (int j = 0; j < breakfastlist.size(); j++) {
 
-                String foodNameNew = breakfastlist.get(j).getItemName();
+                final String foodNameNew = breakfastlist.get(j).getItemName();
                 double foodItemPrice = breakfastlist.get(j).getItemPrice();
+                final int foodKey = breakfastlist.get(j).getFoodKey();
 
                 if (!foodName.equalsIgnoreCase(foodNameNew)) {
 
@@ -326,6 +370,8 @@ if(SeeAll.equals("No"))
                                                    @Override
                                                    public void onClick(View v) {
 
+                                                       int newCount = 0;
+                                                       String count = null;
                                                        Integer q = Integer.parseInt(String.valueOf(quantity.getText()));
 
                                                        if (!minusBtn.isEnabled()) {
@@ -334,42 +380,100 @@ if(SeeAll.equals("No"))
                                                        String newq = (++q).toString();
                                                        quantity.setText(newq);
 
-                                                       if(Integer.parseInt(newq) == 1) {
+                                                       if (Integer.parseInt(newq) == 1) {
+
                                                            rl1.removeView(rowView);
                                                            rl.removeView(rowView);
                                                            rl.addView(rowView);
-                                                       }
 
+                                                           SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
+                                                           count = itemCountInfo.getString("countOverall", "");
+                                                           newCount = Integer.parseInt(count);
+
+                                                           SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                                           itemCounteditor.putString("countOverall", String.valueOf(newCount + 1));
+                                                           itemCounteditor.commit();
+
+                                                           final SubOrderBean bfbean = new SubOrderBean();
+                                                           bfbean.setFoodKey(foodKey);
+                                                           bfbean.setCourseFlag(1);
+                                                           bfbean.setFoodName(foodNameNew);
+                                                           bfbean.setFoodQuantity(q);
+
+                                                           String suborderJson = null;
+                                                           suborderJson = prefs.getString("SubOrderList", suborderJson);
+                                                           /*if(suborderJson != null) {
+                                                               SharedPreferences.Editor editor = prefs.edit();
+                                                               editor.clear();
+                                                               editor.commit();
+                                                           }*/
+
+                                                           //If value already present in shared preference from dinner or lunch page, add that to the suborderList of this page
+                                                           if (suborderJson != null) {
+                                                               List<SubOrderBean> l = new ArrayList<SubOrderBean>();
+                                                               Type listTypeSubOrder = new TypeToken<ArrayList<SubOrderBean>>() {
+                                                               }.getType();
+                                                               l = new Gson().fromJson(suborderJson, listTypeSubOrder);
+                                                               bfSuborderList.addAll(l);
+                                                           }
+
+                                                           bfSuborderList.add(bfbean);
+                                                           SharedPreferences.Editor subOrderEditor = prefs.edit();
+                                                           subOrderEditor.putString("SubOrderList", new Gson().toJson(bfSuborderList));
+                                                           subOrderEditor.commit();
+
+                                                           planCart.refreshActionBar(getActivity());
+
+                                                       }
                                                    }
                                                }
                     );
 
                     minusBtn.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
+                        @Override
+                        public void onClick(View v) {
 
-                                                        Integer q = Integer.parseInt(String.valueOf(quantity.getText()));
+                            int newCount = 0;
+                            String count = null;
+                            Integer q = Integer.parseInt(String.valueOf(quantity.getText()));
 
-                                                        if (q != 0) {
-                                                            String newq = (--q).toString();
-                                                            if(Integer.parseInt(newq) == 0){
-                                                                rl.removeView(rowView);
-                                                                rl1.removeView(rowView);
-                                                                rl1.addView(rowView);
-                                                            }
-                                                            //double newPrice = Double.valueOf(foodPrice) * Double.valueOf(newq);
-                                                            //priceAmount.setText(String.valueOf(newPrice));
-                                                            quantity.setText(newq);
-                                                        }
-                                                        else if(q == 0){
-                                                            rl.removeView(rowView);
-                                                            rl1.removeView(rowView);
-                                                            rl1.addView(rowView);
-                                                        }
-                                                    }
-                                                }
+                            if (q != 0) {
+
+                                String newq = (--q).toString();
+
+                                if (Integer.parseInt(newq) == 0) {
+
+                                    rl.removeView(rowView);
+                                    rl1.removeView(rowView);
+                                    rl1.addView(rowView);
+
+                                    SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
+                                    count = itemCountInfo.getString("countOverall", "");
+                                    newCount = Integer.parseInt(count);
+
+                                        SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                        itemCounteditor.putString("countOverall", String.valueOf(newCount - 1));
+                                        itemCounteditor.commit();
+
+
+                                    planCart.refreshActionBar(getActivity());
+
+                                }
+                                //double newPrice = Double.valueOf(foodPrice) * Double.valueOf(newq);
+                                //priceAmount.setText(String.valueOf(newPrice));
+                                quantity.setText(newq);
+
+                            } else if (q == 0) {
+
+                                rl.removeView(rowView);
+                                rl1.removeView(rowView);
+                                rl1.addView(rowView);
+
+                            }
+
+                    }
+                }
                     );
-
 
                     txtTitle.setText(foodNameNew);
                     imageView.setImageResource(R.drawable.food);
@@ -379,121 +483,7 @@ if(SeeAll.equals("No"))
                 }
 
             }
-        /*TextView addNext = new TextView(this.getActivity());
-        addNext.setText("Kalpesh Waran M");
-        addNext.setTextSize(20);
-        addNext.setTextColor(Color.BLACK);
-        addNext.setVisibility(View.VISIBLE);
-        addNext.setGravity(Gravity.CENTER);
-        addNext.setLayoutParams(new ViewGroup.LayoutParams(200, ViewGroup.LayoutParams.WRAP_CONTENT));
-        rl.addView(addNext);*/
 
-        /*for (int j = 0; j < breakfastlist.size(); j++) {
-
-            if(j%2==0)
-            {
-                ImageButton imageButton = new ImageButton(this.getActivity());
-                imageButton.setVisibility(View.VISIBLE);
-                imageButton.setMinimumWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-                imageButton.setImageResource(R.drawable.food);
-                rl.addView(imageButton);
-            }
-
-            else
-            {
-                Button minusBtn = new Button(this.getActivity());
-                minusBtn.setText("-");
-                minusBtn.setTextSize(20);
-                minusBtn.setVisibility(View.VISIBLE);
-                minusBtn.setGravity(Gravity.CENTER);
-                minusBtn.setId(breakfastlist.get(j).getFoodKey());
-                minusBtn.setEnabled(false);
-                minusBtn.setLayoutParams(new ViewGroup.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT));
-                rl.addView(minusBtn);
-
-                EditText itemCount = new EditText(this.getActivity());
-                itemCount.setText("0");
-                itemCount.setTextSize(20);
-                itemCount.setVisibility(View.VISIBLE);
-                itemCount.setGravity(Gravity.CENTER);
-                itemCount.setId(breakfastlist.get(j).getFoodKey());
-                itemCount.setEnabled(false);
-                itemCount.setLayoutParams(new ViewGroup.LayoutParams(150, ViewGroup.LayoutParams.WRAP_CONTENT));
-                rl.addView(itemCount);
-
-                Button plusbtn = new Button(this.getActivity());
-                plusbtn.setText("+");
-                plusbtn.setTextSize(20);
-                plusbtn.setVisibility(View.VISIBLE);
-                plusbtn.setGravity(Gravity.CENTER);
-                plusbtn.setId(breakfastlist.get(j).getFoodKey());
-                plusbtn.setEnabled(false);
-                plusbtn.setLayoutParams(new ViewGroup.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT));
-                rl.addView(plusbtn);
-
-                EditText itemPrice = new EditText(this.getActivity());
-                itemPrice.setText("0");
-                itemPrice.setTextSize(20);
-                itemPrice.setVisibility(View.VISIBLE);
-                itemPrice.setGravity(Gravity.CENTER);
-                itemPrice.setId(breakfastlist.get(j).getFoodKey());
-                itemPrice.setEnabled(false);
-                itemPrice.setLayoutParams(new ViewGroup.LayoutParams(150, ViewGroup.LayoutParams.WRAP_CONTENT));
-                rl.addView(itemPrice);
-
-            }*/
-
-/*
-        final int size = rl.getChildCount();
-
-        for(int k = 0; k < size ; k=k+4 )
-        {
-            CheckBox item1 = (CheckBox) rl.getChildAt(k);
-            final Button btn2 = (Button) rl.getChildAt(k+1);
-            final EditText itemQuantity = (EditText) rl.getChildAt(k+2);
-            final Button btn1 = (Button) rl.getChildAt(k+3);
-
-            item1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    enableButtons(breakfast, btn1, btn2);
-                }
-            });
-
-            btn1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Integer q1 = Integer.parseInt(String.valueOf(itemQuantity.getText()));
-                    if(!btn2.isEnabled())
-                    {
-                        btn2.setEnabled(true);
-                    }
-                    String newq = (++q1).toString();
-                    itemQuantity.setText(newq);
-
-                }
-
-            });
-
-
-            btn2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Integer q2 = Integer.parseInt(String.valueOf(itemQuantity.getText()));
-
-                    if (q2 != 0) {
-                        String newq = (--q2).toString();
-                        itemQuantity.setText(newq);
-                    }
-
-                }
-            });
-        }
-*/
-
-        System.out.println("BreakFast View : " + breakfast.toString());
         return breakfast;
 
     }

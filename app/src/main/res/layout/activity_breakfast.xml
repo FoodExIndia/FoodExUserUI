@@ -29,7 +29,6 @@
                 android:rowCount="100"
                 tools:context=".GridXMLActivity" >
 
-
             <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/GridLayoutBreakfast"

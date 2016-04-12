@@ -37,11 +37,10 @@
 
     <string name="title_section1">Home</string>
     <string name="title_section2">My Account</string>
-    <string name="title_section3">My Orders</string>
-    <string name="title_section4">Contact Us</string>
-    <string name="title_section5">About US</string>
-    <string name="title_section6">Legal</string>
-
+    <string name="title_section3">Contact Us</string>
+    <string name="title_section4">About US</string>
+    <string name="title_section5">Legal</string>
+    <string name="title_section6">LogOut</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -65,5 +64,11 @@
     <string name="title_activity_sign_up_address_info">SignUpAddressInfo</string>
     <string name="title_activity_home_image_viewer">HomeImageViewer</string>
     <string name="title_activity_fragment1">Fragment1</string>
+    <string name="title_activity_logout">Logout</string>
+    <string name="title_activity_legal">Legal</string>
+    <string name="title_activity_my_account">MyAccount</string>
+    <string name="title_activity_my_orders">MyOrders</string>
+    <string name="title_activity_about_us">AboutUs</string>
+    <string name="title_activity_contact_us">ContactUs</string>
 
 </resources>

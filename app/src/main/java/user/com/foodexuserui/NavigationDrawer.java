@@ -35,6 +35,7 @@ import java.util.List;
 
 import user.com.Entities.MenuBean;
 import user.com.commons.CustomPagerAdapter;
+import user.com.foodexuserui.NavDrawerPages.MyAccount;
 import user.com.foodexuserui.R;
 
 public class NavigationDrawer extends ActionBarActivity implements
@@ -63,7 +64,7 @@ public class NavigationDrawer extends ActionBarActivity implements
         acb.setIcon(R.drawable.img_profile);
         setContentView(R.layout.activity_navdraw);
 
-        /*//added to set breakfast list items
+        //added to set breakfast list items
         List<MenuBean> listMenuBean = new ArrayList<MenuBean>();
         MenuBean bean1 = new MenuBean();
         bean1.setFoodKey(101);
@@ -106,7 +107,7 @@ public class NavigationDrawer extends ActionBarActivity implements
         editor.clear();
         Gson json = new Gson();
         editor.putString("list1", json.toJson(listMenuBean));
-        editor.commit();*/
+        editor.commit();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.navigation_drawer);
@@ -129,13 +130,26 @@ public class NavigationDrawer extends ActionBarActivity implements
                     .commit();
 
         } else if (position == 1) {
-            Intent i = new Intent(NavigationDrawer.this, FoodExHome.class);
+            Intent i = new Intent(NavigationDrawer.this, MyAccount.class);
             startActivity(i);
             /*fragmentManager.beginTransaction()
                     .replace(R.id.container, MailFragment.newInstance())
                     .commit();*/
         } else if (position == 2) {
             Intent i = new Intent(NavigationDrawer.this, FoodExHome.class);
+            startActivity(i);
+            /*fragmentManager.beginTransaction()
+                    .replace(R.id.container, SettingsFragment.newInstance())
+                    .commit();*/
+        }
+        else if (position == 5) {
+
+            SharedPreferences prefs = getSharedPreferences("UserData", 0);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.clear();
+            editor.commit();
+
+            Intent i = new Intent(NavigationDrawer.this, Login.class);
             startActivity(i);
             /*fragmentManager.beginTransaction()
                     .replace(R.id.container, SettingsFragment.newInstance())
@@ -151,10 +165,10 @@ public class NavigationDrawer extends ActionBarActivity implements
                 mTitle = "Home";
                 break;
             case 2:
-                mTitle = "My Profile";
+                mTitle = "My Account";
                 break;
             case 3:
-                mTitle = "My Orders";
+                mTitle = "Contact Us";
                 break;
         }
     }

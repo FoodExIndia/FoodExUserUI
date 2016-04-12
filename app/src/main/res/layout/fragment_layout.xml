@@ -1,3 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="2dp"
+    android:layout_margin="2dp"
+    android:background="@color/date_item_day"
+    android:orientation="horizontal" >
+
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/GridLayoutItemList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="1"
+        android:rowCount="10"
+        android:orientation="horizontal"
+        tools:context=".GridXMLActivity" >
+
+        <TextView
+            android:id="@+id/item"
+            android:layout_width="wrap_content"
+            android:layout_height="125dp"
+            android:background="@drawable/icon_blurred"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_margin="1dp"
+            android:padding="1dp"
+            android:textColor="#33CC33" />
+
+        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/drawerListView"
+            android:background="#e6e6e6"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="3dp"
+            tools:context="com.android.navigationdrawer.NavigationDrawerFragment" />
+
+</GridLayout>
+
+    </LinearLayout>
+
+
+    <!--
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,3 +52,4 @@
     android:divider="@android:color/transparent"
     android:dividerHeight="3dp"
     tools:context="com.android.navigationdrawer.NavigationDrawerFragment" />
+-->

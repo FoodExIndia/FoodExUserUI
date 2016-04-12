@@ -80,6 +80,11 @@ public class Plan1 extends AppCompatActivity {
 
         //TabHost tabHost = getTabHost();
 
+        SharedPreferences itemCountInfo = this.getSharedPreferences("itemCount", 0);
+        SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+        itemCounteditor.clear();
+        itemCounteditor.commit();
+
         final FragmentTabHost tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
@@ -94,6 +99,7 @@ public class Plan1 extends AppCompatActivity {
                 Dinner.class, null);
 
         final String foodCourse = getIntent().getExtras().getString("Course").toString();
+
         if (foodCourse.equalsIgnoreCase("Breakfast")) {
             tabHost.setCurrentTab(0);
         } else if (foodCourse.equalsIgnoreCase("Lunch")) {
@@ -334,7 +340,7 @@ public class Plan1 extends AppCompatActivity {
 
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_plan1, menu);
@@ -346,6 +352,22 @@ public class Plan1 extends AppCompatActivity {
         String itemCount = (String) count.getText();
 
         menuItem.setIcon(buildCounterDrawable(Integer.parseInt(itemCount), R.drawable.cart_icon));
+
+        return true;
+    }*/
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_plan1, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.cartIcon);
+
+        final View viewNew = View.inflate(this.getApplicationContext(), R.layout.cartaddition, null);
+        TextView count = (TextView) viewNew.findViewById(R.id.count);
+        int itemCount = Integer.parseInt(count.getText().toString());
+
+        menuItem.setIcon(buildCounterDrawable(itemCount, R.drawable.cart_icon));
 
         return true;
     }
@@ -368,6 +390,7 @@ public class Plan1 extends AppCompatActivity {
 
     protected Drawable buildCounterDrawable(int count, int backgroundImageId) {
 
+        int newCount = 0;
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.cartaddition, null);
 
@@ -380,7 +403,23 @@ public class Plan1 extends AppCompatActivity {
 //        }
 
         TextView textView = (TextView) view.findViewById(R.id.count);
-        textView.setText("" + count);
+
+        SharedPreferences itemCountInfo = getSharedPreferences("itemCount", 0);
+        String count1 =  itemCountInfo.getString("countOverall", "");
+
+        if(!count1.equalsIgnoreCase("")) {
+            newCount = Integer.parseInt(count1);
+            textView.setText(String.valueOf(newCount));
+        }
+        else {
+            String count2 = textView.getText().toString();
+            newCount = Integer.parseInt(count2)+1;
+            textView.setText(String.valueOf(newCount));
+        }
+
+        SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+        itemCounteditor.putString("countOverall", String.valueOf(newCount));
+        itemCounteditor.commit();
 
         view.measure(
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
@@ -393,6 +432,12 @@ public class Plan1 extends AppCompatActivity {
         view.setDrawingCacheEnabled(false);
 
         return new BitmapDrawable(getResources(), bitmap);
+
+    }
+
+    public void refreshActionBar(Activity activity){
+
+        activity.invalidateOptionsMenu();
 
     }
 

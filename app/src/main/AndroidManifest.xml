@@ -12,8 +12,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Login"
-            android:label="@string/app_name">
+            android:name=".FoodExLogo"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,28 +22,41 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Login"
+            android:label="@string/title_activity_my_account"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".SignUp"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_sign_up" />
         <activity
             android:name=".ForgetPassword"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_forget_password" />
         <activity
             android:name=".TermsConditions"
+            android:screenOrientation="portrait"
             android:label="TermsConditions" />
         <activity
             android:name=".EnterOTP"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_enter_otp" />
         <activity
             android:name=".NewPassword"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_resend_otp" />
         <activity
             android:name=".FoodExHome"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_food_ex_home" />
         <activity
             android:name=".NavigationDrawer"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_drawer_check" />
         <activity
             android:name=".ImageViewer"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_image_viewer" />
         <activity
             android:name=".Plan1"
@@ -50,41 +64,77 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Breakfast"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_breakfast" />
         <activity
             android:name=".Lunch"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_lunch" />
         <activity
             android:name=".Dinner"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_dinner" />
         <activity
             android:name=".Plan1DatePicker"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_plan1_date_picker"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Plan2"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_plan3"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SampleCart"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_sample_cart"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignUpAddress"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_sign_up_address"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignUpAddressInfo"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_sign_up_address_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HomeImageViewer"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_home_image_viewer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Fragment1"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_fragment1"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NavDrawerPages.Logout"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_logout"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NavDrawerPages.Legal"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_legal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NavDrawerPages.MyAccount"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_my_account" />
+        <activity
+            android:name=".NavDrawerPages.AboutUs"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NavDrawerPages.ContactUs"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_contact_us"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

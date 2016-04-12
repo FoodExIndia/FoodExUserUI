@@ -10,6 +10,7 @@ import android.content.SyncStatusObserver;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -67,6 +68,7 @@ public class Login extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         final SharedPreferences prefs = getSharedPreferences("UserData", 0);
@@ -77,8 +79,6 @@ public class Login extends Activity {
             Intent i = new Intent(Login.this, FoodExHome.class);
             startActivity(i);
         }
-
-        setContentView(R.layout.activity_login);
         //Button goButton = (Button) findViewById(R.id.button1);
 
         Username = (EditText) findViewById(R.id.Username);
@@ -132,7 +132,7 @@ public class Login extends Activity {
                 listMenuBean.add(bean4);
                 listMenuBean.add(bean5);
 
-                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                /*int SDK_INT = android.os.Build.VERSION.SDK_INT;
                 try {
                     if (SDK_INT > 8) {
 
@@ -172,7 +172,7 @@ public class Login extends Activity {
                     // TODO Auto-generated catch block
                     System.out.print("Connection Error in Login");
                     e.printStackTrace();
-                }
+                }*/
 
                 SharedPreferences prefs = getSharedPreferences("MenuData", 0);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -180,8 +180,8 @@ public class Login extends Activity {
                 editor.putString("list1", json.toJson(foodBeanList));
                 editor.commit();
 
-                //Intent i = new Intent(Login.this, NavigationDrawer.class);
-                //startActivity(i);
+                Intent i = new Intent(Login.this, NavigationDrawer.class);
+                startActivity(i);
 
             }
         });

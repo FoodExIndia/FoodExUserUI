@@ -79,6 +79,8 @@ public class Dinner extends Fragment {
         rl.removeAllViews();
         final GridLayout rl1 = (GridLayout) dinner.findViewById(R.id.GridLayoutDinner1);
         rl1.removeAllViews();
+
+        final Plan1 planCart = new Plan1();
         //final EditText dpDate = (EditText) plan1.findViewById(R.id.plan1DatePicker);
 
         //getDinnerMenu = (Button) dinner.findViewById(R.id.buttonDN);
@@ -290,7 +292,7 @@ public class Dinner extends Fragment {
 
             for (final SubOrderBean bean : subOrderBeanList) {
 
-                if (foodName != null && !foodName.equals("") && bean.getFoodName().equals(foodName)) {
+                if (foodName != null && !foodName.equals("")) {
 
                     String newCount = String.valueOf(bean.getFoodQuantity());
 
@@ -312,11 +314,33 @@ public class Dinner extends Fragment {
                                                    @Override
                                                    public void onClick(View v) {
 
+                                                       String count = null;
+                                                       int newCount = 0;
                                                        Integer q = Integer.parseInt(String.valueOf(quantity.getText()));
 
                                                        if (!minusBtn.isEnabled()) {
+
                                                            minusBtn.setEnabled(true);
+
                                                        }
+
+                                                       if(q == 0)
+                                                       {
+                                                           rl1.removeView(rowView);
+                                                           rl.removeView(rowView);
+                                                           rl.addView(rowView);
+
+                                                           SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
+                                                           count = itemCountInfo.getString("countOverall", "");
+                                                           newCount = Integer.parseInt(count);
+
+                                                           SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                                           itemCounteditor.putString("countOverall", String.valueOf(newCount + 1));
+                                                           itemCounteditor.commit();
+
+                                                           planCart.refreshActionBar(getActivity());
+                                                       }
+
                                                        String newq = (++q).toString();
                                                        bean.setFoodQuantity(Integer.parseInt(newq));
                                                        double newPrice = Double.valueOf(foodPrice) * Double.valueOf(newq);
@@ -348,22 +372,42 @@ public class Dinner extends Fragment {
                                                     @Override
                                                     public void onClick(View v) {
 
+                                                        String count = null;
+                                                        int newCount = 0;
                                                         Integer q = Integer.parseInt(String.valueOf(quantity.getText()));
 
                                                         if (q != 0) {
+
                                                             String newq = (--q).toString();
+
                                                             if (Integer.parseInt(newq) == 0) {
+
                                                                 rl.removeView(rowView);
                                                                 rl1.removeView(rowView);
                                                                 rl1.addView(rowView);
+
+                                                                SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
+                                                                count = itemCountInfo.getString("countOverall", "");
+                                                                newCount = Integer.parseInt(count);
+
+                                                                SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                                                itemCounteditor.putString("countOverall", String.valueOf(newCount - 1));
+                                                                itemCounteditor.commit();
+
+                                                                planCart.refreshActionBar(getActivity());
+
                                                             }
+
                                                             double newPrice = Double.valueOf(foodPrice) * Double.valueOf(newq);
                                                             priceAmount.setText(String.valueOf(newPrice));
                                                             quantity.setText(newq);
+
                                                         } else if (q == 0) {
+
                                                             rl.removeView(rowView);
                                                             rl1.removeView(rowView);
                                                             rl1.addView(rowView);
+
                                                         }
                                                     }
                                                 }
@@ -393,8 +437,9 @@ public class Dinner extends Fragment {
 
         for (int j = 0; j < dinnerlist.size(); j++) {
 
-            String foodNameNew = dinnerlist.get(j).getItemName();
+            final String foodNameNew = dinnerlist.get(j).getItemName();
             double foodItemPrice = dinnerlist.get(j).getItemPrice();
+            final int foodKey = dinnerlist.get(j).getFoodKey();
 
             if (!foodName.equalsIgnoreCase(foodNameNew)) {
 
@@ -414,6 +459,8 @@ public class Dinner extends Fragment {
                                                @Override
                                                public void onClick(View v) {
 
+                                                   int newCount = 0;
+                                                   String count = null;
                                                    Integer q = Integer.parseInt(String.valueOf(quantity.getText()));
 
                                                    if (!minusBtn.isEnabled()) {
@@ -422,11 +469,52 @@ public class Dinner extends Fragment {
                                                    String newq = (++q).toString();
                                                    quantity.setText(newq);
 
-                                                   if(Integer.parseInt(newq) == 1) {
+                                                   if (Integer.parseInt(newq) == 1) {
+
                                                        rl1.removeView(rowView);
                                                        rl.removeView(rowView);
                                                        rl.addView(rowView);
+
+                                                       SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
+                                                       count = itemCountInfo.getString("countOverall", "");
+                                                       newCount = Integer.parseInt(count);
+
+                                                       SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                                       itemCounteditor.putString("countOverall", String.valueOf(newCount + 1));
+                                                       itemCounteditor.commit();
+
+                                                       final SubOrderBean bfbean = new SubOrderBean();
+                                                       bfbean.setFoodKey(foodKey);
+                                                       bfbean.setCourseFlag(1);
+                                                       bfbean.setFoodName(foodNameNew);
+                                                       bfbean.setFoodQuantity(q);
+
+                                                       String suborderJson = null;
+                                                       suborderJson = prefs.getString("SubOrderList", suborderJson);
+                                                           /*if(suborderJson != null) {
+                                                               SharedPreferences.Editor editor = prefs.edit();
+                                                               editor.clear();
+                                                               editor.commit();
+                                                           }*/
+
+                                                       //If value already present in shared preference from dinner or lunch page, add that to the suborderList of this page
+                                                       if (suborderJson != null) {
+                                                           List<SubOrderBean> l = new ArrayList<SubOrderBean>();
+                                                           Type listTypeSubOrder = new TypeToken<ArrayList<SubOrderBean>>() {
+                                                           }.getType();
+                                                           l = new Gson().fromJson(suborderJson, listTypeSubOrder);
+                                                           dnSuborderList.addAll(l);
+                                                       }
+
+                                                       dnSuborderList.add(bfbean);
+                                                       SharedPreferences.Editor subOrderEditor = prefs.edit();
+                                                       subOrderEditor.putString("SubOrderList", new Gson().toJson(dnSuborderList));
+                                                       subOrderEditor.commit();
+
+                                                       planCart.refreshActionBar(getActivity());
+
                                                    }
+
 
                                                }
                                            }
@@ -436,14 +524,31 @@ public class Dinner extends Fragment {
                                                 @Override
                                                 public void onClick(View v) {
 
+                                                    int newCount = 0;
+                                                    String count = null;
                                                     Integer q = Integer.parseInt(String.valueOf(quantity.getText()));
 
                                                     if (q != 0) {
+
                                                         String newq = (--q).toString();
-                                                        if(Integer.parseInt(newq) == 0){
+
+                                                        if (Integer.parseInt(newq) == 0) {
+
                                                             rl.removeView(rowView);
                                                             rl1.removeView(rowView);
                                                             rl1.addView(rowView);
+
+                                                            SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
+                                                            count = itemCountInfo.getString("countOverall", "");
+                                                            newCount = Integer.parseInt(count);
+
+                                                            SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                                            itemCounteditor.putString("countOverall", String.valueOf(newCount - 1));
+                                                            itemCounteditor.commit();
+
+
+                                                            planCart.refreshActionBar(getActivity());
+
                                                         }
                                                         //double newPrice = Double.valueOf(foodPrice) * Double.valueOf(newq);
                                                         //priceAmount.setText(String.valueOf(newPrice));

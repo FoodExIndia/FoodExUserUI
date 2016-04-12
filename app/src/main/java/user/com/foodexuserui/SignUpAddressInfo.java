@@ -66,9 +66,15 @@ public class SignUpAddressInfo extends AppCompatActivity {
         final String emailBean = signUpInfo.getString("emailId", "");
         final String passwordBean = signUpInfo.getString("password", "");
 
+        final String fromActivity = getIntent().getStringExtra("from");
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(fromActivity.equalsIgnoreCase("MyAccount")){
+                }else{
+                }
 
                 String cred1 = phoneBean.toString();
                 String cred2 = passwordBean.toString();

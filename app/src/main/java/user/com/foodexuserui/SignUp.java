@@ -208,7 +208,7 @@ public class SignUp extends AppCompatActivity {
 
                     Intent i = new Intent(SignUp.this, SignUpAddressInfo.class);
                     try{
-                    startActivity(i);
+                    startActivity(i.putExtra("from","SignUp"));
                     }
                     catch(Exception ex){
                         ex.printStackTrace();
