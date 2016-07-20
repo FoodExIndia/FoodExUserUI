@@ -19,11 +19,12 @@
             android:id="@+id/OTP"
             android:background="#FAFAFA"
             android:minHeight="40dp"
+            android:maxHeight="50dp"
+            android:layout_margin="20dp"
             style="@android:style/Widget.DeviceDefault.EditText"
+            android:shadowColor="@android:color/darker_gray"
             android:hint="Enter OTP"
-            android:layout_above="@+id/confirmOTPbtn"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_above="@+id/confirmOTPbtn" />
 
         <Button
             android:layout_width="wrap_content"
@@ -31,6 +32,12 @@
             android:text="Submit"
             android:id="@+id/confirmOTPbtn"
             android:minWidth="150dp"
+            android:background="#28dc09"
+            android:textAllCaps="true"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_margin="5dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
@@ -38,9 +45,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="RESEND OTP"
+            android:text="Resend OTP"
             android:id="@+id/Resendotp"
-            android:layout_marginTop="71dp"
+            android:layout_margin="20dp"
             android:textStyle="bold"
             android:textSize="16dp"
             android:typeface="serif"
@@ -50,14 +57,12 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="OTP sent to the your number:"
+            android:text="OTP sent to the your number..."
             android:id="@+id/OTPlabel1"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textAlignment="viewEnd"
             android:paddingBottom="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"

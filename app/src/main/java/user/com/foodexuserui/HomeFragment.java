@@ -57,18 +57,6 @@ public class HomeFragment extends Fragment {
     int[] sampleImages = {R.drawable.plan1, R.drawable.plan1, R.drawable.plan1, R.drawable.plan1, R.drawable.plan1};
 
     HorizontalListView list;
-
-    String[] itemname ={
-            "Safari",
-            "Camera",
-            "Global",
-            "FireFox",
-            "UC Browser",
-            "Android Folder",
-            "VLC Player",
-            "Cold War"
-    };
-
     Integer[] imgid={
             R.drawable.food,
             R.drawable.food,
@@ -80,8 +68,8 @@ public class HomeFragment extends Fragment {
             R.drawable.food
     };
 
-    pl.rspective.pagerdatepicker.view.DateRecyclerView dateList = null;
-    ViewPager viewPagerDate = null;
+    //pl.rspective.pagerdatepicker.view.DateRecyclerView dateList = null;
+    //ViewPager viewPagerDate = null;
 
     /**
      * Returns a new instance of this fragment for the given section number.
@@ -160,6 +148,7 @@ public class HomeFragment extends Fragment {
 
             String suborderJson = null;
             suborderJson = prefs.getString("SubOrderList", suborderJson);
+
             if(suborderJson != null) {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.clear();

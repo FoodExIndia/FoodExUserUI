@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="2dp"
+    android:layout_margin="2dp"
+    android:background="@color/date_item_day"
+    android:orientation="vertical" >
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#f2f2f2"
+        android:padding="0dp"
+        android:fillViewport="false">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="#f2f2f2">
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/GridLayoutUserAddressDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="2"
+                android:rowCount="100"
+                android:orientation="vertical"
+                tools:context=".GridXMLActivity" >
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:id="@+id/UD4"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Address Info"
+                            android:layout_gravity="left"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_marginLeft="2dp"
+                            android:textSize="25dp"
+                            android:paddingTop="25dp"
+                            android:padding="2dp"
+                            android:textColor="#33CC33"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <EditText android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:background="#FAFAFA"
+                    android:id="@+id/address1"
+                    android:inputType="text"
+                    android:minHeight="30dp"
+                    style="@android:style/Widget.DeviceDefault.EditText"
+                    android:textColor="#010101"
+                    android:hint="Address Line 1"
+                    android:contextClickable="false"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:layout_margin="3dp" />
+
+                <EditText android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:background="#FAFAFA"
+                    android:id="@+id/address2"
+                    android:inputType="text"
+                    android:minHeight="30dp"
+                    style="@android:style/Widget.DeviceDefault.EditText"
+                    android:textColor="#010101"
+                    android:hint="Address Line 2"
+                    android:enabled="false"
+                    android:contextClickable="false"
+                    android:clickable="false"
+                    android:layout_margin="3dp"/>
+
+                <Spinner android:layout_height="25dp"
+                    android:layout_width="match_parent"
+                    android:background="#FAFAFA"
+                    android:id="@+id/city"
+                    android:minHeight="30dp"
+                    android:entries="@array/city_array"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:textColor="#010101"
+                    android:hint="City"
+                    android:enabled="false"
+                    android:clickable="false"
+                    android:layout_margin="3dp" />
+
+                <Spinner android:layout_height="25dp"
+                    android:layout_width="match_parent"
+                    android:background="#FAFAFA"
+                    android:id="@+id/area"
+                    android:minHeight="30dp"
+                    android:entries="@array/area_array"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:textColor="#010101"
+                    android:hint="Area"
+                    android:enabled="false"
+                    android:clickable="false"
+                    android:layout_margin="3dp" />
+
+                <Spinner android:layout_height="25dp"
+                    android:layout_width="match_parent"
+                    android:background="#FAFAFA"
+                    android:id="@+id/state"
+                    android:minHeight="30dp"
+                    android:entries="@array/state_array"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:textColor="#010101"
+                    android:hint="State"
+                    android:enabled="false"
+                    android:clickable="false"
+                    android:layout_margin="3dp"/>
+
+                <EditText android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:background="#FAFAFA"
+                    android:id="@+id/pincode"
+                    android:inputType="text"
+                    android:minHeight="30dp"
+                    style="@android:style/Widget.DeviceDefault.EditText"
+                    android:textColor="#010101"
+                    android:hint="Pincode"
+                    android:enabled="false"
+                    android:contextClickable="false"
+                    android:clickable="false"
+                    android:layout_margin="3dp" />
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:id="@+id/UD5"
+                    android:orientation="horizontal"/>
+
+                <Button android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:id="@+id/saveAddress"
+                    android:text="Save"
+                    android:background="#28dc09"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="70dp"
+                    android:textAllCaps="true"
+                    android:enabled="false"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_below="@+id/pincode" />
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:id="@+id/UD6"
+                    android:orientation="horizontal"/>
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:id="@+id/UD8"
+                    android:orientation="horizontal"/>
+
+            </GridLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

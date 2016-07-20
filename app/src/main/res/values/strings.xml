@@ -32,6 +32,27 @@
         <item>Andhra Pradesh</item>
     </string-array>
 
+    <string-array name="BF_timings_array">
+        <!--<item>Select State</item>-->
+        <item>7 - 7.30 AM</item>
+        <item>8 - 8.30 AM</item>
+        <item>9 - 9.30 AM</item>
+    </string-array>
+
+    <string-array name="LN_timings_array">
+        <!--<item>Select State</item>-->
+        <item>12 - 12.30 PM</item>
+        <item>1 - 1.30 PM</item>
+        <item>2 - 2.30 PM</item>
+    </string-array>
+
+    <string-array name="DN_timings_array">
+        <!--<item>Select State</item>-->
+        <item>7 - 7.30 PM</item>
+        <item>8 - 8.30 PM</item>
+        <item>9 - 9.30 PM</item>
+    </string-array>
+
     <string name="title_activity_sample_check">SampleCheck</string>
     <string name="title_activity_drawer_check">DrawerCheck</string>
 

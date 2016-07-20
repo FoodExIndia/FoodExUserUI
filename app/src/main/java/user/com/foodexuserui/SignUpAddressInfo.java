@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -65,6 +66,12 @@ public class SignUpAddressInfo extends AppCompatActivity {
         final String phoneBean = signUpInfo.getString("phoneNumber", "");
         final String emailBean = signUpInfo.getString("emailId", "");
         final String passwordBean = signUpInfo.getString("password", "");
+
+        System.out.println("1 : "+fNameBean+"");
+        System.out.println("1 : " + lNameBean + "");
+        System.out.println("1 : "+phoneBean+"");
+        System.out.println("1 : "+emailBean+"");
+        System.out.println("1 : "+passwordBean+"");
 
         final String fromActivity = getIntent().getStringExtra("from");
 
@@ -149,14 +156,16 @@ public class SignUpAddressInfo extends AppCompatActivity {
                         response = helper.post("signup", signUpJson);
                         String responseString = new BasicResponseHandler().handleResponse(response);
 
-                        if (responseString.equalsIgnoreCase("success")) {
+                        if (responseString.length()>0) {
 
                             Intent i = new Intent(SignUpAddressInfo.this, EnterOTP.class);
                             startActivity(i.putExtra("from", "SignUp").putExtra("phNumber", phoneBean.toString()));
 
                         } else {
+
                             System.out.println("SignUp Error");
                             System.exit(0);
+
                         }
 
                     }

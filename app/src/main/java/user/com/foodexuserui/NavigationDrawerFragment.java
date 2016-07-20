@@ -125,39 +125,44 @@ public class NavigationDrawerFragment extends Fragment {
                         if (position == 0) {
                             images[0] = icon_home;
                             images[1] = img_profile;
-                            images[2] = icon_contact;
+                            images[2] = img_profile;
                             images[3] = img_profile;
-                            images[4] = icon_legal;
-                            images[5] = img_logout;
+                            images[4] = icon_contact;
+                            images[5] = icon_contact;
+                            images[6] = img_logout;
                         } else if (position == 1) {
                             images[0] = icon_home;
                             images[1] = img_profile;
-                            images[2] = icon_contact;
+                            images[2] = img_profile;
                             images[3] = img_profile;
-                            images[4] = icon_legal;
-                            images[5] = img_logout;
+                            images[4] = icon_contact;
+                            images[5] = icon_contact;
+                            images[6] = img_logout;
                         } else if (position == 2) {
                             images[0] = icon_home;
                             images[1] = img_profile;
-                            images[2] = icon_contact;
+                            images[2] = img_profile;
                             images[3] = img_profile;
-                            images[4] = icon_legal;
-                            images[5] = img_logout;
+                            images[4] = icon_contact;
+                            images[5] = icon_contact;
+                            images[6] = img_logout;
                         }
                         if (position == 3) {
                             images[0] = icon_home;
                             images[1] = img_profile;
-                            images[2] = icon_contact;
+                            images[2] = img_profile;
                             images[3] = img_profile;
-                            images[4] = icon_legal;
-                            images[5] = img_logout;
+                            images[4] = icon_contact;
+                            images[5] = icon_contact;
+                            images[6] = img_logout;
                         } else if (position == 4) {
                             images[0] = icon_home;
                             images[1] = img_profile;
-                            images[2] = icon_contact;
+                            images[2] = img_profile;
                             images[3] = img_profile;
-                            images[4] = icon_legal;
-                            images[5] = img_logout;
+                            images[4] = icon_contact;
+                            images[5] = icon_contact;
+                            images[6] = img_logout;
                         } else if (position == 5) {
                             /*images[0] = img_profile;
                             images[1] = img_orders;
@@ -172,10 +177,9 @@ public class NavigationDrawerFragment extends Fragment {
                     }
                 });
 
-        titles = new String[] { getString(R.string.title_section1),
-                getString(R.string.title_section2),getString(R.string.title_section3),"About Us","Legal","Logout"};
-        images = new int[] { icon_home, img_profile,
-                icon_contact,img_profile, icon_legal, img_logout };
+        titles = new String[] { "Home","My Account","My Addresses","My Orders","Contact Us","About Us","Logout"};
+        images = new int[] { icon_home, img_profile,img_profile,img_profile,
+                icon_contact,icon_contact, img_logout };
         selectedposition = new int[] { mCurrentSelectedPosition };
 
         mMyDrawerAdapter = new MyDrawerAdapter(getActivity(), titles, images,

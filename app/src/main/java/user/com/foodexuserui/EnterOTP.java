@@ -8,10 +8,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.apache.http.Header;
+import org.apache.http.HeaderIterator;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ProtocolVersion;
+import org.apache.http.StatusLine;
 import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.params.HttpParams;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import user.com.Entities.DeliveryAddressEntity;
+import user.com.Entities.MenuBean;
+import user.com.Entities.SubOrderBean;
+import user.com.Entities.UserDetails;
+import user.com.Entities.UsersEntity;
 import user.com.commons.HttpHelper;
 
 public class EnterOTP extends AppCompatActivity {
@@ -39,6 +59,7 @@ public class EnterOTP extends AppCompatActivity {
         submitButton = (Button) findViewById(R.id.confirmOTPbtn);
 
         userphoneNumber.setText(phNum);
+        userphoneNumber.setVisibility(View.INVISIBLE);
 
         ResendOTP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +79,8 @@ public class EnterOTP extends AppCompatActivity {
                         String responseString = new BasicResponseHandler().handleResponse(response);
 
                         if(responseString.equalsIgnoreCase("success")) {
-                            Intent i = new Intent(EnterOTP.this, EnterOTP.class);
-                            //startActivity(i.putExtra("from", "ForgetPassword").putExtra("phNumber", phoneNumber.getText().toString()));
+                            Intent i = new Intent(EnterOTP.this, Plan1.class);
+                            startActivity(i.putExtra("from", "ForgetPassword").putExtra("phNumber", phoneNumber.getText().toString()));
                         }
 
                         else{
@@ -94,7 +115,22 @@ public class EnterOTP extends AppCompatActivity {
                         response = helper.get(("otp?loginId="+userphoneNumber.getText().toString()+"&otp=" + OTPvalue.getText().toString() + ""),EnterOTP.this);
                         String responseString = new BasicResponseHandler().handleResponse(response);
                         System.out.println("Response Status:" + responseString);
+
                         if (responseString.equalsIgnoreCase("success")) {
+
+                            HttpResponse userDetailsResponse = null;
+                            userDetailsResponse = helper.get(("userdetails?loginId="+userphoneNumber.getText().toString()+""),EnterOTP.this);
+                            String userResponseString = new BasicResponseHandler().handleResponse(userDetailsResponse);
+                            System.out.println("Response Status:" + userResponseString);
+
+                            Gson json = new Gson();
+
+                            List<UserDetails> userDetailsBean = new ArrayList<UserDetails>();
+
+                            Type listType1 = new TypeToken<ArrayList<UserDetails>>() {
+                            }.getType();
+                            userDetailsBean = json.fromJson(userResponseString, listType1);
+
                             if (getIntent().getStringExtra("from").equalsIgnoreCase("SignUp")) {
                                 Intent i = new Intent(EnterOTP.this, NavigationDrawer.class);
                                 startActivity(i);
@@ -103,6 +139,8 @@ public class EnterOTP extends AppCompatActivity {
                                 startActivity(i);
                             }
                         } else {
+                            Toast.makeText(getApplicationContext(), "SignUp Error !!!",
+                                    Toast.LENGTH_SHORT).show();
                             System.out.println("Sign Up Error..");
                         }
 

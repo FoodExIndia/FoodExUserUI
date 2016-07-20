@@ -40,7 +40,7 @@
                     android:layout_above="@+id/GridLayoutDinner1"
                     tools:context=".GridXMLActivity" />
 
-                <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--                <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:tools="http://schemas.android.com/tools"
                     android:id="@+id/GridLayoutDinner1"
                     android:layout_width="match_parent"
@@ -50,6 +50,8 @@
                     android:layout_below="@+id/GridLayoutDinner"
                     android:orientation="horizontal"
                     tools:context=".GridXMLActivity" />
+-->
+
 
             </GridLayout>
         </RelativeLayout>

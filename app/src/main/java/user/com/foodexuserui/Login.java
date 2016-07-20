@@ -49,7 +49,12 @@ import java.util.TimerTask;
 
 import user.com.Entities.MenuBean;
 import user.com.Entities.SubOrderBean;
+import user.com.Entities.UserDetails;
+import user.com.Entities.UsersEntity;
+import user.com.Entities.ClientEntity;
+import user.com.Entities.DeliveryAddressEntity;
 import user.com.commons.HttpHelper;
+import user.com.foodexuserui.NavDrawerPages.MyAccount;
 
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -226,13 +231,12 @@ public class Login extends Activity {
                 int SDK_INT = android.os.Build.VERSION.SDK_INT;
                 try {
                     if (SDK_INT > 8) {
-
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                                 .permitAll().build();
                         StrictMode.setThreadPolicy(policy);
 
                         HttpHelper helper = new HttpHelper();
-                        response = helper.get(("login?loginId=" + user + "&password=" + pwd + ""),Login.this);
+                        response = helper.get(("login?loginId=" + user + "&password=" + pwd + ""), Login.this);
 
                         //progressDialog = ProgressDialog.show(Login.this,"Loading...",
                         //        "Loading application View, please wait...", false, false);
@@ -240,7 +244,20 @@ public class Login extends Activity {
                         String responseString = new BasicResponseHandler().handleResponse(response);
                         System.out.println("Response Status:" + responseString);
 
-                        if (responseString.equalsIgnoreCase("success")) {
+                        Gson json = new Gson();
+                        UserDetails userDetailsBean = new UserDetails();
+
+                        Type listType1 = new TypeToken<UserDetails>() {
+                        }.getType();
+
+                        try {
+                            userDetailsBean = json.fromJson(responseString, listType1);
+                        }
+                        catch (Exception ex){
+                            ex.printStackTrace();
+                        }
+
+                        if (userDetailsBean.getResultCode() == 1) {
 
                             SharedPreferences prefs = getSharedPreferences("UserData", 0);
                             SharedPreferences.Editor editor = prefs.edit();
@@ -248,7 +265,20 @@ public class Login extends Activity {
                             editor.putString("password", pwd);
                             editor.commit();
 
-                            Intent i = new Intent(Login.this, FoodExHome.class);
+                            String userEmailID = userDetailsBean.getUserEntity().getEmailId();
+                            String userPhoneNumber = String.valueOf(userDetailsBean.getUserEntity().getMobileNum());
+                            String userName = userDetailsBean.getClientEntity().getClientFirstName();
+                            String userClientKey = userDetailsBean.getClientEntity().getClientKey();
+
+                            SharedPreferences myAccountPrefs = getSharedPreferences("MyAccountUserData", 0);
+                            SharedPreferences.Editor myAccountEditor = myAccountPrefs.edit();
+                            myAccountEditor.putString("myAccountEmailId", userEmailID);
+                            myAccountEditor.putString("myAccountPhoneNumber", userPhoneNumber);
+                            myAccountEditor.putString("myAccountUserName", userName);
+                            myAccountEditor.putString("myAccountClientKey", userClientKey);
+                            myAccountEditor.commit();
+
+                            Intent i = new Intent(Login.this, MyAccount.class);
                             startActivity(i);
 
                         } else {
@@ -265,9 +295,8 @@ public class Login extends Activity {
                             Password.setText("");
                         }
                     }
-
-
-                } catch (Exception e) {
+                }
+                    catch (Exception e) {
                     // TODO Auto-generated catch block
                     System.out.print("Connection Error in Login");
                     e.printStackTrace();

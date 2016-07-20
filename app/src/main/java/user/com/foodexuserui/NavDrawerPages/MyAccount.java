@@ -44,76 +44,20 @@ public class MyAccount extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        ImageView editAddress = (ImageView)findViewById(R.id.editIcon);
-        final Button saveAddress = (Button)findViewById(R.id.saveAddress);
-        Button addAddress = (Button)findViewById(R.id.addNewAddress);
+        final SharedPreferences myAccountPrefs = getSharedPreferences("MyAccountUserData", 0);
+        final String userName = myAccountPrefs.getString("myAccountUserName", "");
+        final String userMail = myAccountPrefs.getString("myAccountEmailId", "");
+        final String userPhoneNumber = myAccountPrefs.getString("myAccountPhoneNumber", "");
 
-        final EditText addressline1 = (EditText) findViewById(R.id.address1);
-        final EditText addressline2 = (EditText) findViewById(R.id.address2);
-        final Spinner citydropdown = (Spinner) findViewById((R.id.city));
-        final Spinner areadropdown = (Spinner) findViewById((R.id.area));
-        final Spinner statedropdown = (Spinner) findViewById((R.id.state));
-        final EditText pincodeNumber = (EditText) findViewById(R.id.pincode);
+        TextView userNameString = (TextView)findViewById(R.id.usrName);
+        TextView userContactString = (TextView)findViewById(R.id.usrContact);
+        TextView userMailString = (TextView)findViewById(R.id.usrMail);
 
-        saveAddress.setEnabled(true);
-
-        citydropdown.setEnabled(false);
-        citydropdown.setClickable(false);
-
-        areadropdown.setEnabled(false);
-        areadropdown.setClickable(false);
-
-        statedropdown.setEnabled(false);
-        statedropdown.setClickable(false);
-
-        addAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(MyAccount.this, SignUpAddressInfo.class);
-                startActivity(intent.putExtra("from","MyAccount"));
+        userNameString.setText(userName);
+        userMailString.setText(userMail);
+        userContactString.setText(userPhoneNumber);
 
             }
-        });
-
-        editAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                addressline1.setEnabled(true);
-                addressline1.setClickable(true);
-
-                addressline2.setEnabled(true);
-                addressline2.setClickable(true);
-
-                citydropdown.setEnabled(true);
-                citydropdown.setClickable(true);
-
-                areadropdown.setEnabled(true);
-                areadropdown.setClickable(true);
-
-                statedropdown.setEnabled(true);
-                statedropdown.setClickable(true);
-
-                pincodeNumber.setEnabled(true);
-                pincodeNumber.setClickable(true);
-
-                saveAddress.setEnabled(true);
-                saveAddress.setTextColor(Color.WHITE);
-                saveAddress.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), " Button Clicked !!!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-
-                });
-
-            }
-
-        });
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

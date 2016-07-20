@@ -255,7 +255,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#ffffff"
-
             android:columnCount="1"
             android:rowCount="16"
             android:orientation="horizontal"
@@ -336,6 +335,7 @@
             android:textColor="#010101"
             android:hint="Phone Number"
             android:layout_margin="3dp"
+            android:maxLength="10"
             android:layout_below="@+id/email"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
@@ -502,6 +502,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Proceed With Address Info"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textAllCaps="true"
+            android:background="#28dc09"
             android:id="@+id/registerbtn"
             android:layout_gravity="center_horizontal"
             android:layout_below="@+id/confirmpwd"

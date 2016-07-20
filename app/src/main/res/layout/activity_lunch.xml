@@ -40,7 +40,7 @@
                     android:layout_above="@+id/GridLayoutLunch1"
                     tools:context=".GridXMLActivity" />
 
-                <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--                <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:tools="http://schemas.android.com/tools"
                     android:id="@+id/GridLayoutLunch1"
                     android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                     android:rowCount="100"
                     android:layout_below="@+id/GridLayoutLunch"
                     android:orientation="horizontal"
-                    tools:context=".GridXMLActivity" />
+                    tools:context=".GridXMLActivity" />-->
 
             </GridLayout>
         </RelativeLayout>

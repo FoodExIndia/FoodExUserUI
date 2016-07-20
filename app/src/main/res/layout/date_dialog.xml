@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp" android:scrollbars="none"
+        android:fillViewport="false">
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+
+
+        <Button
+        android:id="@+id/b1" android:layout_width="100px" android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=" July 19 "
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp" android:layout_above="@+id/b2"/>
+
+    <Button
+        android:id="@+id/b2" android:layout_width="100px" android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=" July 20 "
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_above="@+id/b3"/>
+
+    <Button
+        android:id="@+id/b3" android:layout_width="100px" android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=" July 21 "
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp" />
+
+            </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

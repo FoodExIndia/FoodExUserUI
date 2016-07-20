@@ -36,6 +36,7 @@ import java.util.List;
 import user.com.Entities.MenuBean;
 import user.com.commons.CustomPagerAdapter;
 import user.com.foodexuserui.NavDrawerPages.MyAccount;
+import user.com.foodexuserui.NavDrawerPages.MyAddress;
 import user.com.foodexuserui.R;
 
 public class NavigationDrawer extends ActionBarActivity implements
@@ -136,7 +137,7 @@ public class NavigationDrawer extends ActionBarActivity implements
                     .replace(R.id.container, MailFragment.newInstance())
                     .commit();*/
         } else if (position == 2) {
-            Intent i = new Intent(NavigationDrawer.this, FoodExHome.class);
+            Intent i = new Intent(NavigationDrawer.this, MyAddress.class);
             startActivity(i);
             /*fragmentManager.beginTransaction()
                     .replace(R.id.container, SettingsFragment.newInstance())

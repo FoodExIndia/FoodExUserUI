@@ -3,6 +3,8 @@ package user.com.foodexuserui;
 import android.app.Activity;
 import android.app.ActivityGroup;
 import android.app.Application;
+import android.app.Dialog;
+import android.content.Context;
 import android.app.FragmentManager;
 import android.app.LocalActivityManager;
 import android.app.TabActivity;
@@ -78,6 +80,24 @@ public class Plan1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan1);
 
+
+        final Context context = this;
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.date_dialog);
+        dialog.setTitle("Delivery Date !!!");
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.b1);
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+
         //TabHost tabHost = getTabHost();
 
         SharedPreferences itemCountInfo = this.getSharedPreferences("itemCount", 0);
@@ -85,22 +105,27 @@ public class Plan1 extends AppCompatActivity {
         itemCounteditor.clear();
         itemCounteditor.commit();
 
-        final FragmentTabHost tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
+        /*final FragmentTabHost tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
+
+        tabHost.setSaveFromParentEnabled(true);
+        tabHost.setSaveEnabled(true);
 
         tabHost.addTab(
                 tabHost.newTabSpec("Breakfast").setIndicator("Breakfast", null),
-                Breakfast.class, null);
+                Breakfast.class, savedInstanceState);
         tabHost.addTab(
                 tabHost.newTabSpec("Lunch").setIndicator("Lunch", null),
-                Lunch.class, null);
+                Lunch.class, savedInstanceState);
         tabHost.addTab(
                 tabHost.newTabSpec("Dinner").setIndicator("Dinner", null),
-                Dinner.class, null);
+                Dinner.class, savedInstanceState);*/
 
         final String foodCourse = getIntent().getExtras().getString("Course").toString();
 
-        if (foodCourse.equalsIgnoreCase("Breakfast")) {
+        //final String foodCourse = "Breakfast";
+
+/*        if (foodCourse.equalsIgnoreCase("Breakfast")) {
             tabHost.setCurrentTab(0);
         } else if (foodCourse.equalsIgnoreCase("Lunch")) {
             tabHost.setCurrentTab(1);
@@ -108,10 +133,11 @@ public class Plan1 extends AppCompatActivity {
             tabHost.setCurrentTab(2);
         }else{
             tabHost.setCurrentTab(0);
-        }
+        }*/
 
-        //Tab = (CustomViewPager)findViewById(R.id.pager1);
-        //Tab.setPagingEnabled(true);
+        Tab = (CustomViewPager)findViewById(R.id.pager1);
+        Tab.setPagingEnabled(true);
+        Tab.setOffscreenPageLimit(3);
 
         //tabHost.setOnTabChangedListener(new TabHostListener(this.getApplicationContext(), tabHost));
 
@@ -137,7 +163,7 @@ public class Plan1 extends AppCompatActivity {
 
         //final String imageBtn = getIntent().getStringExtra("from");
 
-        dateList = (pl.rspective.pagerdatepicker.view.DateRecyclerView) findViewById(R.id.date_list);
+        /*dateList = (pl.rspective.pagerdatepicker.view.DateRecyclerView) findViewById(R.id.date_list);
         viewPagerDate = (ViewPager) findViewById(R.id.pagerDate);
 
         Calendar c = Calendar.getInstance();
@@ -183,15 +209,15 @@ public class Plan1 extends AppCompatActivity {
                 //User changed page
             }
         });
+*/
+
+
 
         //added to clear previously set foodOrders in FoodOrder
         /*final SharedPreferences foodOrderprefs = getSharedPreferences("FoodOrder", 0);
         SharedPreferences.Editor foodOrderEditor = foodOrderprefs.edit();
         foodOrderEditor.clear();
         foodOrderEditor.commit();*/
-
-
-
 
         /*final SharedPreferences prefs = getSharedPreferences("PlanData", 0);
         final SharedPreferences.Editor editor = prefs.edit();
@@ -206,10 +232,10 @@ public class Plan1 extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        //TabAdapter = new TabPagerAdapter(getSupportFragmentManager());
+        TabAdapter = new TabPagerAdapter(getSupportFragmentManager());
 
         //Relates to CustomVIewPager class - also defined in Plan1 ViewPager field
-        /*Tab = (CustomViewPager)findViewById(R.id.pager1);
+        Tab = (CustomViewPager)findViewById(R.id.pager1);
 
         Tab.setOnPageChangeListener(
 
@@ -223,6 +249,18 @@ public class Plan1 extends AppCompatActivity {
                 });
 
         Tab.setAdapter(TabAdapter);
+
+/*
+            if (foodCourse.equalsIgnoreCase("Breakfast")) {
+                this.selectFragment(0);
+            }
+            else if (foodCourse.equalsIgnoreCase("Lunch")) {
+                this.selectFragment(1);
+            }
+            else{
+                this.selectFragment(2);
+            }
+*/
 
         //disables the swiping between fragments in Plan1 Activity
         Tab.setPagingEnabled(true);
@@ -248,11 +286,11 @@ public class Plan1 extends AppCompatActivity {
 
             }
         };
-*/
+
         //Add New Tab
-        //actionBar.addTab(actionBar.newTab().setText("Breakfast").setTabListener(tabListener));
-        //actionBar.addTab(actionBar.newTab().setText("Lunch").setTabListener(tabListener));
-        //actionBar.addTab(actionBar.newTab().setText("Dinner").setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText("Breakfast").setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText("Lunch").setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText("Dinner").setTabListener(tabListener));
 
 /*
         plan1Date = (EditText)findViewById(R.id.plan1DatePicker);
@@ -381,6 +419,9 @@ public class Plan1 extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
+            case R.id.cartIcon:
+                Intent intent = new Intent(this,SampleCart.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -442,7 +483,7 @@ public class Plan1 extends AppCompatActivity {
     }
 
 
-    /*public void selectFragment(int position)
+    public void selectFragment(int position)
     {
         Tab.setCurrentItem(position, false);
     }
@@ -451,7 +492,7 @@ public class Plan1 extends AppCompatActivity {
     {
         Tab.setCurrentItem(position, false);
 
-    }*/
+    }
 
     /*public void getNextDate(String dateNew)
     {

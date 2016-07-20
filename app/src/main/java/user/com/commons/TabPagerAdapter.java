@@ -16,16 +16,23 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        /*switch (i) {
-            case 0:
-                return new Breakfast();
-            case 1:
-                return new Lunch();
-            case 2:
-                return new Dinner();
-        }*/
-        return null;
 
+        Fragment fragment = new Fragment();
+
+        switch (i) {
+            case 0:
+                fragment = new Breakfast();
+                break;
+            case 1:
+                fragment = new Lunch();
+                break;
+            case 2:
+                fragment = new Dinner();
+                break;
+            default:
+                return null;
+        }
+        return fragment;
     }
 
     @Override

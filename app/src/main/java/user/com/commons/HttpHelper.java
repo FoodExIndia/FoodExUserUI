@@ -42,6 +42,8 @@ public class HttpHelper {
 	{
 		Login login = new Login();
 		String url = buildUrl(urn);
+		System.out.println("Response URN:" + urn);
+		System.out.println("Response URL:" + url);
 		HttpGet httpGet = new HttpGet(url);
 			try {
 			response = client.execute(httpGet);
@@ -78,7 +80,7 @@ public class HttpHelper {
 
 	private String buildUrl(String urn)
 	{
-		return "http://192.168.0.101:8081/FoodExUser/rest/User/" + urn;
+		return "http://192.168.0.106:8081/FoodExUser/rest/User/" + urn;
 	}
 
 	public void printconnectionError(Activity currentActivity){

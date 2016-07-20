@@ -1,6 +1,7 @@
 package user.com.foodexuserui;
 
 import android.app.ActionBar;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.Intent;
@@ -62,14 +63,21 @@ public class Breakfast extends Fragment {
 
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     Button getBreakfastMenu;
     android.support.v7.app.ActionBar actionBar;
 
-    //@Override
+    @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
         final SimpleDateFormat sdf = new SimpleDateFormat("d-M-yyyy");
+        final SharedPreferences menuItems = this.getActivity().getSharedPreferences("PlanMenu", 0);
 
         final View breakfast;
         breakfast = inflater.inflate(R.layout.activity_breakfast, container, false);
@@ -77,31 +85,10 @@ public class Breakfast extends Fragment {
         final View plan1;
         plan1 = inflater.inflate(R.layout.activity_plan1, container, false);
 
-        final List<SubOrderBean> bfSuborderList = new ArrayList<SubOrderBean>();
-
         final String foodName = getActivity().getIntent().getExtras().getString("foodItem").toString();
-
         final String SeeAll = getActivity().getIntent().getExtras().getString("SeeAll").toString();
-
-        /*final List<String> foodNameList = new ArrayList<String>();
-
-        Gson gson = new Gson();
-
-        for (String fName: foodNameList) {
-            if(!fName.equals(foodName)){
-                foodNameList.add(fName);
-            }
-        }
-
-        String foodNames = gson.toJson(foodNameList);
-        SharedPreferences foodNameListprefs =this.getActivity().getSharedPreferences("foodNameList", 0);
-        SharedPreferences.Editor editor = foodNameListprefs.edit();
-        editor.putString("foodNames", foodNames);
-        editor.commit();*/
-
         final String foodPrice = getActivity().getIntent().getExtras().getString("itemPrice");
 
-        final SharedPreferences menuItems = this.getActivity().getSharedPreferences("PlanMenu", 0);
         final SharedPreferences imgandDate = this.getActivity().getSharedPreferences("PlanData", 0);
         final SharedPreferences prefs1 = this.getActivity().getSharedPreferences("MenuData", 0);
         final String menuJsonList = prefs1.getString("list1", "");
@@ -109,10 +96,14 @@ public class Breakfast extends Fragment {
         final SharedPreferences prefs = this.getActivity().getSharedPreferences("FoodOrder", 0);
         final String subOrderList = prefs.getString("SubOrderList", "");
 
+        final List<SubOrderBean> bfSuborderList = new ArrayList<SubOrderBean>();
+
+        //final SharedPreferences imgandDate = this.getActivity().getSharedPreferences("PlanData", 0);
+
         final GridLayout rl = (GridLayout) breakfast.findViewById(R.id.GridLayoutBreakfast);
         rl.removeAllViews();
-        final GridLayout rl1 = (GridLayout) breakfast.findViewById(R.id.GridLayoutBreakfast1);
-        rl1.removeAllViews();
+        //final GridLayout rl1 = (GridLayout) breakfast.findViewById(R.id.GridLayoutBreakfast1);
+        //rl1.removeAllViews();
         final Plan1 planCart = new Plan1();
 
         //final EditText dpDate = (EditText) plan1.findViewById(R.id.plan1DatePicker);
@@ -166,6 +157,7 @@ public class Breakfast extends Fragment {
                         }.getType();
                         l = new Gson().fromJson(suborderJson, listType);
                         bfSuborderList.addAll(l);
+
                     }
 
                     SharedPreferences.Editor itemsEditor = prefs.edit();
@@ -186,7 +178,7 @@ public class Breakfast extends Fragment {
         List<SubOrderBean> subOrderBeanList = new ArrayList<SubOrderBean>();
         Type listTypeSuborder = new TypeToken<ArrayList<SubOrderBean>>() {
         }.getType();
-        subOrderBeanList = json.fromJson(subOrderList, listTypeSuborder);
+        //subOrderBeanList = json.fromJson(subOrderList, listTypeSuborder);
 
         Type listType = new TypeToken<ArrayList<MenuBean>>() {
         }.getType();
@@ -198,7 +190,7 @@ public class Breakfast extends Fragment {
             }
         }
 
-if(SeeAll.equals("No"))
+/*if(SeeAll.equals("No"))
 {
     for (final SubOrderBean bean : subOrderBeanList) {
 
@@ -206,7 +198,7 @@ if(SeeAll.equals("No"))
 
         if (foodName != null && !foodName.equals("")) {
 
-            String itemCount = String.valueOf(bean.getFoodQuantity());
+            //String itemCount = String.valueOf(bean.getFoodQuantity());
 
             final View rowView;
             rowView = inflater.inflate(R.layout.home_item_list, container, false);
@@ -298,9 +290,9 @@ if(SeeAll.equals("No"))
                                                         count = itemCountInfo.getString("countOverall", "");
                                                         newCount = Integer.parseInt(count);
 
-                                                            SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
-                                                            itemCounteditor.putString("countOverall", String.valueOf(newCount - 1));
-                                                            itemCounteditor.commit();
+                                                        SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                                        itemCounteditor.putString("countOverall", String.valueOf(newCount - 1));
+                                                        itemCounteditor.commit();
 
                                                         planCart.refreshActionBar(getActivity());
 
@@ -323,12 +315,14 @@ if(SeeAll.equals("No"))
 
             txtTitle.setText(bean.getFoodName());
             imageView.setImageResource(R.drawable.food);
-            quantity.setText("s");
+            //quantity.setText();
             //byte[] blob = getBlob("");
             //Bitmap bitmap = BitmapFactory.decodeByteArray()
             //imageView.setImageBitmap(bitmap);
             extratxt.setText("Description of Food Item :  " + foodName);
             priceAmount.setText(foodPrice);
+            //quantity.setText(String.valueOf(bean.getFoodQuantity()));
+            quantity.setText("7");
             rl.addView(rowView);
 
         }
@@ -345,14 +339,19 @@ if(SeeAll.equals("No"))
         addNewItem.setId(001);
         addNewItem.setLayoutParams(new ViewGroup.LayoutParams(1000, ViewGroup.LayoutParams.MATCH_PARENT));
         rl1.addView(addNewItem);
-
+*/
             for (int j = 0; j < breakfastlist.size(); j++) {
 
                 final String foodNameNew = breakfastlist.get(j).getItemName();
                 double foodItemPrice = breakfastlist.get(j).getItemPrice();
                 final int foodKey = breakfastlist.get(j).getFoodKey();
 
-                if (!foodName.equalsIgnoreCase(foodNameNew)) {
+                /*List<String> foodItemList = new ArrayList<String>();
+                for (final SubOrderBean bean : subOrderBeanList) {
+                    foodItemList.add(bean.getFoodName());
+                }*/
+
+                //if (foodItemList.contains(foodNameNew)) {
 
                     final View rowView;
                     rowView = inflater.inflate(R.layout.home_item_list, container, false);
@@ -364,7 +363,19 @@ if(SeeAll.equals("No"))
                     Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
                     final Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
                     final EditText quantity = (EditText) rowView.findViewById(R.id.Count);
-                    quantity.setText("0");
+
+                /*if(prefs.contains("bfSubOrderList")) {
+                    String suborderList = new String();
+                    prefs.getString("bfSubOrderList", suborderList);
+                    Gson json1 = new Gson();
+                    List<SubOrderBean> newBfBean = new ArrayList<SubOrderBean>();
+                    newBfBean = json1.fromJson(subOrderList, listTypeSuborder);
+                    for (SubOrderBean updateBean : bfSuborderList) {
+                        if (updateBean.getFoodName().equals(foodName)) {
+                            quantity.setText(updateBean.getFoodQuantity());
+                        }
+                    }
+                }*/
 
                     plusBtn.setOnClickListener(new View.OnClickListener() {
                                                    @Override
@@ -377,14 +388,40 @@ if(SeeAll.equals("No"))
                                                        if (!minusBtn.isEnabled()) {
                                                            minusBtn.setEnabled(true);
                                                        }
+
                                                        String newq = (++q).toString();
                                                        quantity.setText(newq);
 
-                                                       if (Integer.parseInt(newq) == 1) {
+                                                       if (Integer.parseInt(newq)==1) {
 
-                                                           rl1.removeView(rowView);
-                                                           rl.removeView(rowView);
-                                                           rl.addView(rowView);
+                                                           final SubOrderBean bfbean = new SubOrderBean();
+                                                           bfbean.setFoodKey(foodKey);
+                                                           bfbean.setCourseFlag(1);
+                                                           bfbean.setFoodName(foodNameNew);
+                                                           bfbean.setFoodQuantity(q);
+
+                                                           String suborderJson = null;
+                                                           suborderJson = prefs.getString("bfSubOrderList", suborderJson);
+
+                                                           /*if(suborderJson != null) {
+                                                               SharedPreferences.Editor editor = prefs.edit();
+                                                               editor.clear();
+                                                               editor.commit();
+                                                           }
+
+                                                           //If value already present in shared preference from dinner or lunch page, add that to the suborderList of this page
+                                                           if (suborderJson != null) {
+                                                               List<SubOrderBean> l = new ArrayList<SubOrderBean>();
+                                                               Type listTypeSubOrder = new TypeToken<ArrayList<SubOrderBean>>() {
+                                                               }.getType();
+                                                               l = new Gson().fromJson(suborderJson, listTypeSubOrder);
+                                                               bfSuborderList.addAll(l);
+                                                           }*/
+
+                                                           bfSuborderList.add(bfbean);
+                                                           SharedPreferences.Editor subOrderEditor = prefs.edit();
+                                                           subOrderEditor.putString("bfSubOrderList", new Gson().toJson(bfSuborderList));
+                                                           subOrderEditor.commit();
 
                                                            SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
                                                            count = itemCountInfo.getString("countOverall", "");
@@ -394,37 +431,34 @@ if(SeeAll.equals("No"))
                                                            itemCounteditor.putString("countOverall", String.valueOf(newCount + 1));
                                                            itemCounteditor.commit();
 
-                                                           final SubOrderBean bfbean = new SubOrderBean();
-                                                           bfbean.setFoodKey(foodKey);
-                                                           bfbean.setCourseFlag(1);
-                                                           bfbean.setFoodName(foodNameNew);
-                                                           bfbean.setFoodQuantity(q);
+                                                           planCart.refreshActionBar(getActivity());
+
+                                                       }
+
+
+                                                       if (Integer.parseInt(newq)>1) {
 
                                                            String suborderJson = null;
-                                                           suborderJson = prefs.getString("SubOrderList", suborderJson);
+                                                           suborderJson = prefs.getString("bfSubOrderList", suborderJson);
+
                                                            /*if(suborderJson != null) {
                                                                SharedPreferences.Editor editor = prefs.edit();
                                                                editor.clear();
                                                                editor.commit();
                                                            }*/
 
-                                                           //If value already present in shared preference from dinner or lunch page, add that to the suborderList of this page
-                                                           if (suborderJson != null) {
-                                                               List<SubOrderBean> l = new ArrayList<SubOrderBean>();
-                                                               Type listTypeSubOrder = new TypeToken<ArrayList<SubOrderBean>>() {
-                                                               }.getType();
-                                                               l = new Gson().fromJson(suborderJson, listTypeSubOrder);
-                                                               bfSuborderList.addAll(l);
+                                                           for (SubOrderBean bean:bfSuborderList) {
+                                                               if(bean.getFoodKey() == foodKey){
+                                                                   bean.setFoodQuantity(Integer.parseInt(newq));
+                                                               }
                                                            }
 
-                                                           bfSuborderList.add(bfbean);
                                                            SharedPreferences.Editor subOrderEditor = prefs.edit();
-                                                           subOrderEditor.putString("SubOrderList", new Gson().toJson(bfSuborderList));
+                                                           subOrderEditor.putString("bfSubOrderList", new Gson().toJson(bfSuborderList));
                                                            subOrderEditor.commit();
 
-                                                           planCart.refreshActionBar(getActivity());
-
                                                        }
+
                                                    }
                                                }
                     );
@@ -441,20 +475,58 @@ if(SeeAll.equals("No"))
 
                                 String newq = (--q).toString();
 
+                                if (Integer.parseInt(newq) > 0) {
+
+                                    String suborderJson = null;
+                                    suborderJson = prefs.getString("bfSubOrderList", suborderJson);
+
+                                    /*if(suborderJson != null) {
+                                        SharedPreferences.Editor editor = prefs.edit();
+                                        editor.clear();
+                                        editor.commit();
+                                    }*/
+
+                                    for (SubOrderBean bean:bfSuborderList) {
+                                        if(bean.getFoodKey() == foodKey){
+                                            bean.setFoodQuantity(Integer.parseInt(newq));
+                                        }
+                                    }
+
+                                    SharedPreferences.Editor subOrderEditor = prefs.edit();
+                                    subOrderEditor.putString("bfSubOrderList", new Gson().toJson(bfSuborderList));
+                                    subOrderEditor.commit();
+
+                                }
+
+
                                 if (Integer.parseInt(newq) == 0) {
 
-                                    rl.removeView(rowView);
-                                    rl1.removeView(rowView);
-                                    rl1.addView(rowView);
+                                    String suborderJson = null;
+                                    suborderJson = prefs.getString("bfSubOrderList", suborderJson);
+
+                                    /*if(suborderJson != null) {
+                                        SharedPreferences.Editor editor = prefs.edit();
+                                        editor.clear();
+                                        editor.commit();
+                                    }*/
+
+                                    for (SubOrderBean bean:bfSuborderList) {
+                                        if(bean.getFoodKey() == foodKey){
+                                            bfSuborderList.remove(bean);
+                                        }
+                                    }
+
+                                    SharedPreferences.Editor subOrderEditor = prefs.edit();
+                                    subOrderEditor.putString("bfSubOrderList", new Gson().toJson(bfSuborderList));
+                                    subOrderEditor.commit();
 
                                     SharedPreferences itemCountInfo = getActivity().getSharedPreferences("itemCount", 0);
                                     count = itemCountInfo.getString("countOverall", "");
                                     newCount = Integer.parseInt(count);
 
-                                        SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
-                                        itemCounteditor.putString("countOverall", String.valueOf(newCount - 1));
-                                        itemCounteditor.commit();
-
+                                    SharedPreferences.Editor itemCounteditor = itemCountInfo.edit();
+                                    itemCounteditor.putString("countOverall", String.valueOf(newCount - 1));
+                                    itemCounteditor.commit();
 
                                     planCart.refreshActionBar(getActivity());
 
@@ -464,10 +536,6 @@ if(SeeAll.equals("No"))
                                 quantity.setText(newq);
 
                             } else if (q == 0) {
-
-                                rl.removeView(rowView);
-                                rl1.removeView(rowView);
-                                rl1.addView(rowView);
 
                             }
 
@@ -479,14 +547,22 @@ if(SeeAll.equals("No"))
                     imageView.setImageResource(R.drawable.food);
                     extratxt.setText("Description of Food Item :  " + foodNameNew);
                     priceAmount.setText(String.valueOf(foodItemPrice));
-                    rl1.addView(rowView);
+                    rl.addView(rowView);
                 }
 
-            }
+            //}
 
         return breakfast;
 
     }
+
+   /* public void onSaveInstanceState(Bundle outState){
+        getFragmentManager().putFragment(outState,"myfragment",getTargetFragment());
+    }
+
+    public void onRestoreInstanceState(Bundle inState){
+       Fragment fragment = getFragmentManager().getFragment(inState,"myfragment");
+    }*/
 
     public void enableButtons(View view, Button plus,Button minus){
 

@@ -39,6 +39,7 @@
         android:layout_above="@+id/GridLayoutBreakfast1"
         tools:context=".GridXMLActivity" />
 
+<!--
             <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/GridLayoutBreakfast1"
@@ -49,6 +50,7 @@
                 android:layout_below="@+id/GridLayoutBreakfast"
                 android:orientation="horizontal"
                 tools:context=".GridXMLActivity" />
+-->
 
             </GridLayout>
     </RelativeLayout>

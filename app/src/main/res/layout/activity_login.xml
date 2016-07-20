@@ -200,8 +200,7 @@
             android:maxHeight="50dp"
             android:ems="10"
             style="@android:style/Widget.DeviceDefault.EditText"
-            android:shadowColor="@android:color/darker_gray"
-            android:layout_margin="5dp"/>
+            android:shadowColor="@android:color/darker_gray"/>
 
         <TextView
             android:layout_width="match_parent"

@@ -39,6 +39,7 @@ public class SignUp extends AppCompatActivity {
     SignUpBean bean = new SignUpBean();
     Button registerButton;
     HttpResponse response;
+    Boolean passwordFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,21 +80,6 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-     /*   addressline1 = (EditText) findViewById(R.id.address1);
-        addressline2 = (EditText) findViewById(R.id.address2);
-
-        //cityName = (EditText)findViewById(R.id.city);
-        final Spinner citydropdown = (Spinner) findViewById((R.id.city));
-        //final String citybean = String.valueOf(citydropdown.getSelectedItem());
-
-        //areaName = (EditText)findViewById(R.id.area);
-        final Spinner areadropdown = (Spinner) findViewById((R.id.area));
-        //final String areabean = String.valueOf(areadropdown.getSelectedItem());
-
-        //stateName = (EditText)findViewById(R.id.state);
-        final Spinner statedropdown = (Spinner) findViewById((R.id.state));
-        final String statebean = String.valueOf(statedropdown.getSelectedItem());
-*/
         registerButton = (Button) findViewById(R.id.registerbtn);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +112,7 @@ public class SignUp extends AppCompatActivity {
                     emailId.setError("Enter a valid email address");
                 }
 
-                String phoneBean = phoneNumber.getText().toString();
+                String phoneBean = String.valueOf(phoneNumber.getText().toString());
                 if (phoneBean.length() == 0) {
                     phoneNumber.setError("Please enter Phone Number!");
                 }
@@ -149,6 +135,95 @@ public class SignUp extends AppCompatActivity {
                 } else if (confirmPasswordBean.length() > 20 || confirmPasswordBean.length() < 8) {
                     confirmPassword.setError("Password must be 8 - 20 characters");
                 }
+                if (!passwordBean.equals(confirmPasswordBean)) {
+                    password.setError("Password Mismatch");
+                    confirmPassword.setError("Password Mismatch");
+                    password.setText("");
+                    confirmPassword.setText("");
+                }
+                else
+                {
+                    passwordFlag = true;
+                }
+
+                SharedPreferences signupInfo = getSharedPreferences("signUpInfo", 0);
+                SharedPreferences.Editor signUpeditor = signupInfo.edit();
+                signUpeditor.putString("firstName", fNameBean);
+                signUpeditor.putString("lastName", lNameBean);
+                signUpeditor.putString("phoneNumber", phoneBean);
+                signUpeditor.putString("emailId", emailBean);
+                signUpeditor.putString("password", passwordBean);
+                signUpeditor.commit();
+
+                if(!fNameBean.equals("") && !lNameBean.equals("") && !phoneBean.equals("") && !emailBean.equals("")
+                        && !passwordBean.equals("") && !confirmPasswordBean.equals("") && passwordFlag == true) {
+
+                    int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                    try {
+                        if (SDK_INT > 8) {
+                            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                    .permitAll().build();
+                            StrictMode.setThreadPolicy(policy);
+
+                            String responseString = null;
+                            HttpHelper helper = new HttpHelper();
+                            response = helper.get(("verifymobilenum?loginId=" + phoneBean + ""), SignUp.this);
+                            responseString = new BasicResponseHandler().handleResponse(response);
+
+                            if(responseString.equalsIgnoreCase("Success")) {
+                                Intent i = new Intent(SignUp.this, SignUpAddressInfo.class);
+                                startActivity(i.putExtra("from", "SignUp"));
+                            }
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(), "Mobile Number Already Regsitered !!!",
+                                        Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(SignUp.this, Login.class);
+                                startActivity(i);
+                            }
+                        }
+                        }
+                    catch (Exception ex) {
+                        Toast.makeText(getApplicationContext(),ex.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
+        }
+}
+
+    /*public void onStart(){
+        super.onStart();
+        EditText dobDate = (EditText)findViewById(R.id.dob);
+        dobDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    DobDialog dialog = new DobDialog(v);
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    dialog.show(ft,"DatePicker");
+                }
+
+            }
+        });
+    }*/
+
+     /*   addressline1 = (EditText) findViewById(R.id.address1);
+        addressline2 = (EditText) findViewById(R.id.address2);
+
+        //cityName = (EditText)findViewById(R.id.city);
+        final Spinner citydropdown = (Spinner) findViewById((R.id.city));
+        //final String citybean = String.valueOf(citydropdown.getSelectedItem());
+
+        //areaName = (EditText)findViewById(R.id.area);
+        final Spinner areadropdown = (Spinner) findViewById((R.id.area));
+        //final String areabean = String.valueOf(areadropdown.getSelectedItem());
+
+        //stateName = (EditText)findViewById(R.id.state);
+        final Spinner statedropdown = (Spinner) findViewById((R.id.state));
+        final String statebean = String.valueOf(statedropdown.getSelectedItem());
+*/
+
 
   /*              String address1bean = addressline1.getText().toString();
                 if (address1bean.length() == 0) {
@@ -187,52 +262,3 @@ public class SignUp extends AppCompatActivity {
                     pincodeNumber.setError("Enter a valid Pincode!");
                 }
 */
-                if (!passwordBean.equals(confirmPasswordBean)) {
-                    password.setError("Password Mismatch");
-                    confirmPassword.setError("Password Mismatch");
-                    password.setText("");
-                    confirmPassword.setText("");
-                }
-
-                    SharedPreferences signupInfo = getSharedPreferences("signUpInfo", 0);
-                    SharedPreferences.Editor signUpeditor = signupInfo.edit();
-                    editor.putString("firstName", fNameBean);
-                    editor.putString("lastName", lNameBean);
-                    editor.putString("phoneNumber", phoneBean);
-                    editor.putString("emailId", emailBean);
-                    editor.putString("password", passwordBean);
-                    editor.commit();
-
-                if(!fNameBean.equals("") && !lNameBean.equals("") && !phoneBean.equals("") && !emailBean.equals("")
-                        && !passwordBean.equals("") && !confirmPasswordBean.equals("")) {
-
-                    Intent i = new Intent(SignUp.this, SignUpAddressInfo.class);
-                    try{
-                    startActivity(i.putExtra("from","SignUp"));
-                    }
-                    catch(Exception ex){
-                        ex.printStackTrace();
-                    }
-
-                }
-
-            }
-        });
-    }
-
-    /*public void onStart(){
-        super.onStart();
-        EditText dobDate = (EditText)findViewById(R.id.dob);
-        dobDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    DobDialog dialog = new DobDialog(v);
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft,"DatePicker");
-                }
-
-            }
-        });
-    }*/
-}
