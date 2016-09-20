@@ -91,5 +91,6 @@
     <string name="title_activity_my_orders">MyOrders</string>
     <string name="title_activity_about_us">AboutUs</string>
     <string name="title_activity_contact_us">ContactUs</string>
+    <string name="title_activity_delivery_address">DeliveryAddress</string>
 
 </resources>

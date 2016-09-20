@@ -1,53 +1,32 @@
 package user.com.foodexuserui;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.Path;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.util.LayoutDirection;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
+import android.app.AlertDialog;
+import java.text.SimpleDateFormat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vstechlab.easyfonts.EasyFonts;
 import com.synnapps.carouselview.*;
 
-import org.w3c.dom.Text;
-
 import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Calendar;
 
-import pl.rspective.pagerdatepicker.adapter.DatePagerFragmentAdapter;
-import pl.rspective.pagerdatepicker.adapter.DefaultDateAdapter;
-import pl.rspective.pagerdatepicker.model.DateItem;
-import pl.rspective.pagerdatepicker.view.DateRecyclerView;
-import pl.rspective.pagerdatepicker.view.RecyclerViewInsetDecoration;
 import user.com.Entities.MenuBean;
 import user.com.Entities.SubOrderBean;
-import user.com.commons.HomePagerAdapter;
 import user.com.commons.HorizontalListView;
 
 public class HomeFragment extends Fragment {
@@ -176,7 +155,58 @@ public class HomeFragment extends Fragment {
                                                  @Override
                                                  public void onClick(View v) {
 
-                                                     SharedPreferences.Editor editor = prefs.edit();
+                                                     Calendar c = Calendar.getInstance();
+                                                     SimpleDateFormat sdf = new SimpleDateFormat("EEEE , MMMM dd");
+                                                     String Date1 = sdf.format(c.getTime());
+                                                     c.add(Calendar.DATE,1);
+                                                     String Date2 = sdf.format(c.getTime());
+                                                     c.add(Calendar.DATE,1);
+                                                     String Date3 = sdf.format(c.getTime());
+
+                                                     LayoutInflater inflaterDialog = getActivity().getLayoutInflater();
+                                                     View dialogLayout = inflaterDialog.inflate(R.layout.activity_alertdialog, null);
+
+                                                     TextView orderDate1 = (TextView) dialogLayout.findViewById(R.id.orderDate1);
+                                                     orderDate1.setText(Date1);
+                                                     TextView orderDate2 = (TextView) dialogLayout.findViewById(R.id.orderDate2);
+                                                     orderDate2.setText(Date2);
+                                                     TextView orderDate3 = (TextView) dialogLayout.findViewById(R.id.orderDate3);
+                                                     orderDate3.setText(Date3);
+
+                                                     //added temporarily to check date selection
+                                                     AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+                                                     ad.setIcon(R.drawable.cart_icon);
+                                                     ad.setTitle(" Select Delivery Date ");
+                                                     //ad.setView(LayoutInflater.from(getActivity()).inflate(R.layout.activity_alertdialog, null));
+                                                     ad.setView(dialogLayout);
+
+                                                     ad.setPositiveButton("OK",
+                                                             new android.content.DialogInterface.OnClickListener() {
+                                                                 public void onClick(DialogInterface dialog, int arg1) {
+                                                                     // OK, go back to Main menu
+                                                                     SharedPreferences.Editor editor = prefs.edit();
+                                                                     editor.clear();
+                                                                     editor.commit();
+                                                                     subOrderBeanList.clear();
+                                                                     subOrderBeanList.add(bfbean);
+                                                                     SharedPreferences.Editor itemsEditor = prefs.edit();
+                                                                     itemsEditor.putString("SubOrderList", new Gson().toJson(subOrderBeanList));
+                                                                     itemsEditor.commit();
+                                                                     Intent myIntent = new Intent(getActivity(), Plan1.class);
+                                                                     startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Breakfast").putExtra("itemPrice",String.format("%.2f", foodPrice)).putExtra("SeeAll","No"));
+                                                                 }
+                                                             }
+                                                     );
+
+                                                     ad.setOnCancelListener(new DialogInterface.OnCancelListener(){
+                                                                                public void onCancel(DialogInterface dialog) {
+                                                                                    // OK, go back to Main menu
+                                                                                }}
+                                                     );
+
+                                                     ad.show();
+
+                                                     /*SharedPreferences.Editor editor = prefs.edit();
                                                      editor.clear();
                                                      editor.commit();
                                                      subOrderBeanList.clear();
@@ -185,7 +215,8 @@ public class HomeFragment extends Fragment {
                                                      itemsEditor.putString("SubOrderList", new Gson().toJson(subOrderBeanList));
                                                      itemsEditor.commit();
                                                      Intent myIntent = new Intent(v.getContext(), Plan1.class);
-                                                     startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Breakfast").putExtra("itemPrice",String.format("%.2f", foodPrice)).putExtra("SeeAll","No"));
+                                                     startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Breakfast").putExtra("itemPrice",String.format("%.2f", foodPrice)).putExtra("SeeAll","No"));*/
+
                                                  }
                                              }
                 );

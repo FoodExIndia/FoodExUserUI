@@ -1,0 +1,65 @@
+<ScrollView android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:paddingTop="25px"
+        android:layout_height="match_parent"
+        android:paddingLeft="50px"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton android:id="@+id/dateRadio1"
+            android:layout_width="65px"
+            android:layout_height="wrap_content"></RadioButton>
+
+        <TextView  android:id="@+id/orderDate1"
+            android:textSize="15dp"
+            android:textColor="@android:color/background_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton android:id="@+id/dateRadio2"
+            android:layout_width="65px"
+            android:layout_height="wrap_content"></RadioButton>
+
+        <TextView  android:id="@+id/orderDate2"
+            android:layout_width="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@android:color/background_dark"
+            android:layout_height="wrap_content"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton android:id="@+id/dateRadio3"
+            android:layout_width="65px"
+            android:layout_height="wrap_content"></RadioButton>
+
+        <TextView  android:id="@+id/orderDate3"
+            android:layout_width="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@android:color/background_dark"
+            android:layout_height="wrap_content"></TextView>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

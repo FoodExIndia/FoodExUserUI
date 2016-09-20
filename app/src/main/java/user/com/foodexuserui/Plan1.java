@@ -81,7 +81,7 @@ public class Plan1 extends AppCompatActivity {
         setContentView(R.layout.activity_plan1);
 
 
-        final Context context = this;
+        /*final Context context = this;
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.date_dialog);
         dialog.setTitle("Delivery Date !!!");
@@ -95,7 +95,7 @@ public class Plan1 extends AppCompatActivity {
             }
         });
 
-        dialog.show();
+        dialog.show();*/
 
 
         //TabHost tabHost = getTabHost();

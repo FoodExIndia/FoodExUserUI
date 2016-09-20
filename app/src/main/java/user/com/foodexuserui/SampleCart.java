@@ -34,12 +34,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import user.com.Entities.FinalSubOrderBean;
 import user.com.Entities.MenuBean;
 import user.com.Entities.SubOrderBean;
+import user.com.foodexuserui.NavDrawerPages.MyAccount;
 
 public class SampleCart extends AppCompatActivity {
 
     ActionBar actionBar;
+    ArrayList<SubOrderBean> bfsubOrderBeanList = null;
+    ArrayList<SubOrderBean> lnsubOrderBeanList = null;
+    ArrayList<SubOrderBean> dnsubOrderBeanList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +53,7 @@ public class SampleCart extends AppCompatActivity {
 
         Button editOrder = (Button) findViewById(R.id.editOrder);
 
-        final List<SubOrderBean> cartSuborderList = new ArrayList<SubOrderBean>();
+        final ArrayList<FinalSubOrderBean> cartSuborderList = new ArrayList<FinalSubOrderBean>();
 
         final SharedPreferences prefs1 = getSharedPreferences("MenuData", 0);
         final String menuJsonList = prefs1.getString("list1", "");
@@ -67,9 +72,13 @@ public class SampleCart extends AppCompatActivity {
         List<MenuBean> listMenuBean = new ArrayList<MenuBean>();
         final List<MenuBean> cartlist = new ArrayList<MenuBean>();
 
-        List<SubOrderBean> bfsubOrderBeanList = new ArrayList<SubOrderBean>();
-        List<SubOrderBean> lnsubOrderBeanList = new ArrayList<SubOrderBean>();
-        List<SubOrderBean> dnsubOrderBeanList = new ArrayList<SubOrderBean>();
+        //ArrayList<SubOrderBean> bfsubOrderBeanList = new ArrayList<SubOrderBean>();
+        //ArrayList<SubOrderBean> lnsubOrderBeanList = new ArrayList<SubOrderBean>();
+        //ArrayList<SubOrderBean> dnsubOrderBeanList = new ArrayList<SubOrderBean>();
+
+        bfsubOrderBeanList = new ArrayList<SubOrderBean>();
+        lnsubOrderBeanList = new ArrayList<SubOrderBean>();
+        dnsubOrderBeanList = new ArrayList<SubOrderBean>();
 
         Type listTypeSuborder = new TypeToken<ArrayList<SubOrderBean>>() {
         }.getType();
@@ -86,120 +95,136 @@ public class SampleCart extends AppCompatActivity {
             cartlist.add(bean);
         }
 
-        if ( bfsubOrderBeanList != null){
+        if(bfsubOrderBeanList == null && lnsubOrderBeanList == null && dnsubOrderBeanList == null) {
 
             final TextView breakFastCart = new TextView(this);
-            breakFastCart.setText("Breakfast");
-            breakFastCart.setTextSize(20);
+            breakFastCart.setText("No Items In Your Cart !!!");
+            breakFastCart.setTextSize(25);
             breakFastCart.setVisibility(View.VISIBLE);
             breakFastCart.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
             breakFastCart.setPadding(0, 5, 0, 5);
             breakFastCart.setTextColor(Color.BLACK);
-            breakFastCart.setLayoutParams(new ViewGroup.LayoutParams(1000, ViewGroup.LayoutParams.MATCH_PARENT));
+            breakFastCart.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             rl.addView(breakFastCart);
 
-            for (final SubOrderBean bean : bfsubOrderBeanList) {
+        }
+        else {
 
-                final String foodNameNew = bean.getFoodName();
-                final int foodKey = bean.getFoodKey();
+            if (bfsubOrderBeanList != null) {
 
-                final View rowView;
-                rowView = View.inflate(this, R.layout.home_item_list,null);
+                final TextView breakFastCart = new TextView(this);
+                breakFastCart.setText("Breakfast");
+                breakFastCart.setTextSize(20);
+                breakFastCart.setVisibility(View.VISIBLE);
+                breakFastCart.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+                breakFastCart.setPadding(0, 5, 0, 5);
+                breakFastCart.setTextColor(Color.BLACK);
+                breakFastCart.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                rl.addView(breakFastCart);
 
-                TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
-                ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-                TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
-                TextView priceAmount = (TextView) rowView.findViewById(R.id.price);
-                Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
-                final Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
-                final EditText quantity = (EditText) rowView.findViewById(R.id.Count);
+                for (final SubOrderBean bean : bfsubOrderBeanList) {
 
-                txtTitle.setText(foodNameNew);
-                quantity.setText(String.valueOf(bean.getFoodQuantity()));
-                imageView.setImageResource(R.drawable.food);
-                extratxt.setText("Description of Food Item :  " + foodNameNew);
-                priceAmount.setText("");
-                //rl1.addView(rowView);
-                rl.addView(rowView);
+                    final String foodNameNew = bean.getFoodName();
+                    final int foodKey = bean.getFoodKey();
 
+                    final View rowView;
+                    rowView = View.inflate(this, R.layout.home_item_list, null);
+
+                    TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
+                    ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+                    TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
+                    TextView priceAmount = (TextView) rowView.findViewById(R.id.price);
+                    Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
+                    final Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
+                    final EditText quantity = (EditText) rowView.findViewById(R.id.Count);
+
+                    txtTitle.setText(foodNameNew);
+                    quantity.setText(String.valueOf(bean.getFoodQuantity()));
+                    imageView.setImageResource(R.drawable.food);
+                    extratxt.setText("Description of Food Item :  " + foodNameNew);
+                    priceAmount.setText("");
+                    //rl1.addView(rowView);
+                    rl.addView(rowView);
+
+                }
             }
-        }
-        if (lnsubOrderBeanList != null) {
+            if (lnsubOrderBeanList != null) {
 
-            final TextView lunchCart = new TextView(this);
-            lunchCart.setText("Lunch");
-            lunchCart.setTextSize(20);
-            lunchCart.setVisibility(View.VISIBLE);
-            lunchCart.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
-            lunchCart.setPadding(0, 5, 0, 5);
-            lunchCart.setTextColor(Color.BLACK);
-            lunchCart.setLayoutParams(new ViewGroup.LayoutParams(1000, ViewGroup.LayoutParams.MATCH_PARENT));
-            rl.addView(lunchCart);
+                final TextView lunchCart = new TextView(this);
+                lunchCart.setText("Lunch");
+                lunchCart.setTextSize(20);
+                lunchCart.setVisibility(View.VISIBLE);
+                lunchCart.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+                lunchCart.setPadding(0, 5, 0, 5);
+                lunchCart.setTextColor(Color.BLACK);
+                lunchCart.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                rl.addView(lunchCart);
 
-            for (final SubOrderBean bean : lnsubOrderBeanList) {
+                for (final SubOrderBean bean : lnsubOrderBeanList) {
 
-            final String foodNameNew = bean.getFoodName();
-            final int foodKey = bean.getFoodKey();
+                    final String foodNameNew = bean.getFoodName();
+                    final int foodKey = bean.getFoodKey();
 
-            final View rowView;
-            rowView = View.inflate(this, R.layout.home_item_list, null);
-            rowView.setMinimumWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                    final View rowView;
+                    rowView = View.inflate(this, R.layout.home_item_list, null);
+                    rowView.setMinimumWidth(ViewGroup.LayoutParams.MATCH_PARENT);
 
-            TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
-            ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-            TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
-            TextView priceAmount = (TextView) rowView.findViewById(R.id.price);
-            Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
-            final Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
-            final EditText quantity = (EditText) rowView.findViewById(R.id.Count);
+                    TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
+                    ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+                    TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
+                    TextView priceAmount = (TextView) rowView.findViewById(R.id.price);
+                    Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
+                    final Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
+                    final EditText quantity = (EditText) rowView.findViewById(R.id.Count);
 
-            txtTitle.setText(foodNameNew);
-            quantity.setText(String.valueOf(bean.getFoodQuantity()));
-            imageView.setImageResource(R.drawable.food);
-            extratxt.setText("Description of Food Item :  " + foodNameNew);
-            priceAmount.setText("");
-            //rl1.addView(rowView);
-            rl.addView(rowView);
+                    txtTitle.setText(foodNameNew);
+                    quantity.setText(String.valueOf(bean.getFoodQuantity()));
+                    imageView.setImageResource(R.drawable.food);
+                    extratxt.setText("Description of Food Item :  " + foodNameNew);
+                    priceAmount.setText("");
+                    //rl1.addView(rowView);
+                    rl.addView(rowView);
 
-        }
-    }
+                }
+            }
 
-        if (dnsubOrderBeanList != null) {
+            if (dnsubOrderBeanList != null) {
 
-            final TextView dinnerCart = new TextView(this);
-            dinnerCart.setText("Dinner");
-            dinnerCart.setTextSize(20);
-            dinnerCart.setVisibility(View.VISIBLE);
-            dinnerCart.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
-            dinnerCart.setPadding(0, 5, 0, 5);
-            dinnerCart.setTextColor(Color.BLACK);
-            dinnerCart.setLayoutParams(new ViewGroup.LayoutParams(1000, ViewGroup.LayoutParams.MATCH_PARENT));
-            rl.addView(dinnerCart);
+                final TextView dinnerCart = new TextView(this);
+                dinnerCart.setText("Dinner");
+                dinnerCart.setTextSize(20);
+                dinnerCart.setVisibility(View.VISIBLE);
+                dinnerCart.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+                dinnerCart.setPadding(0, 5, 0, 5);
+                dinnerCart.setTextColor(Color.BLACK);
+                dinnerCart.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                rl.addView(dinnerCart);
 
-            for (final SubOrderBean bean : dnsubOrderBeanList) {
+                for (final SubOrderBean bean : dnsubOrderBeanList) {
 
-            final String foodNameNew = bean.getFoodName();
-            final int foodKey = bean.getFoodKey();
+                    final String foodNameNew = bean.getFoodName();
+                    final int foodKey = bean.getFoodKey();
 
-            final View rowView;
-            rowView = View.inflate(this, R.layout.home_item_list, null);
+                    final View rowView;
+                    rowView = View.inflate(this, R.layout.home_item_list, null);
 
-            TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
-            ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-            TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
-            TextView priceAmount = (TextView) rowView.findViewById(R.id.price);
-            Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
-            final Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
-            final EditText quantity = (EditText) rowView.findViewById(R.id.Count);
+                    TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
+                    ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+                    TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
+                    TextView priceAmount = (TextView) rowView.findViewById(R.id.price);
+                    Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
+                    final Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
+                    final EditText quantity = (EditText) rowView.findViewById(R.id.Count);
 
-            txtTitle.setText(foodNameNew);
-            quantity.setText(String.valueOf(bean.getFoodQuantity()));
-            imageView.setImageResource(R.drawable.food);
-            extratxt.setText("Description of Food Item :  " + foodNameNew);
-            priceAmount.setText("");
-            //rl1.addView(rowView);
-            rl.addView(rowView);
-        }
+                    txtTitle.setText(foodNameNew);
+                    quantity.setText(String.valueOf(bean.getFoodQuantity()));
+                    imageView.setImageResource(R.drawable.food);
+                    extratxt.setText("Description of Food Item :  " + foodNameNew);
+                    priceAmount.setText("");
+                    //rl1.addView(rowView);
+                    rl.addView(rowView);
+                }
+            }
         }
 
         //actionBar = getSupportActionBar();
@@ -212,6 +237,31 @@ public class SampleCart extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
             }
+        });
+
+        Button placeOrderButton = (Button)this.findViewById(R.id.placeOrder);
+        placeOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final FinalSubOrderBean finalbean = new FinalSubOrderBean();
+
+                if (bfsubOrderBeanList != null) {
+                    finalbean.setFinalSubOrderList(bfsubOrderBeanList);
+                }
+                if (lnsubOrderBeanList != null) {
+                    finalbean.setFinalSubOrderList(lnsubOrderBeanList);
+                }
+                if (dnsubOrderBeanList != null) {
+                    finalbean.setFinalSubOrderList(dnsubOrderBeanList);
+                }
+
+                Intent i = new Intent(SampleCart.this, DeliveryAddress.class);
+                startActivity(i);
+
+
+            }
+
         });
 
     }

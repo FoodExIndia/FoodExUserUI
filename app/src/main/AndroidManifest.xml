@@ -133,7 +133,11 @@
             android:label="@string/title_activity_contact_us"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NavDrawerPages.MyAddress"></activity>
+        <activity android:name=".NavDrawerPages.MyAddress" />
+        <activity
+            android:name=".DeliveryAddress"
+            android:label="@string/title_activity_delivery_address"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
