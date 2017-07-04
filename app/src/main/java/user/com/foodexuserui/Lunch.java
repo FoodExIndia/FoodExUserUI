@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 import user.com.Entities.MenuBean;
 import user.com.Entities.SubOrderBean;
@@ -170,6 +172,8 @@ public class Lunch extends Fragment {
 
         for (MenuBean bean : listMenuBean) {
             if (bean.getCourseFlag() == 1) {
+                Log.d("vdvsdvsd",bean.getItemName());
+
                 lunchlist.add(bean);
             }
         }

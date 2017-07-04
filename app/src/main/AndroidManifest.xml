@@ -137,7 +137,7 @@
         <activity
             android:name=".DeliveryAddress"
             android:label="@string/title_activity_delivery_address"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -9,11 +9,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.app.AlertDialog;
+//import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import java.text.SimpleDateFormat;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,6 +28,7 @@ import com.synnapps.carouselview.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Calendar;
 
@@ -85,6 +92,8 @@ public class HomeFragment extends Fragment {
 
         final SharedPreferences prefs = this.getActivity().getSharedPreferences("FoodOrder", 0);
         final String planType = prefs.getString("planType", "");
+
+        final SharedPreferences deliveryDatePrefs = this.getActivity().getSharedPreferences("deliveryDatePrefs", 0);
 
         final List<SubOrderBean> subOrderBeanList = new ArrayList<SubOrderBean>();
         final List<SubOrderBean> bfSuborderList = new ArrayList<SubOrderBean>();
@@ -163,14 +172,14 @@ public class HomeFragment extends Fragment {
                                                      c.add(Calendar.DATE,1);
                                                      String Date3 = sdf.format(c.getTime());
 
-                                                     LayoutInflater inflaterDialog = getActivity().getLayoutInflater();
-                                                     View dialogLayout = inflaterDialog.inflate(R.layout.activity_alertdialog, null);
+                                                     final LayoutInflater inflaterDialog = getActivity().getLayoutInflater();
+                                                     final View dialogLayout = inflaterDialog.inflate(R.layout.activity_alertdialog, null);
 
-                                                     TextView orderDate1 = (TextView) dialogLayout.findViewById(R.id.orderDate1);
+                                                     RadioButton orderDate1 = (RadioButton) dialogLayout.findViewById(R.id.dateRadio1);
                                                      orderDate1.setText(Date1);
-                                                     TextView orderDate2 = (TextView) dialogLayout.findViewById(R.id.orderDate2);
+                                                     RadioButton orderDate2 = (RadioButton) dialogLayout.findViewById(R.id.dateRadio2);
                                                      orderDate2.setText(Date2);
-                                                     TextView orderDate3 = (TextView) dialogLayout.findViewById(R.id.orderDate3);
+                                                     RadioButton orderDate3 = (RadioButton) dialogLayout.findViewById(R.id.dateRadio3);
                                                      orderDate3.setText(Date3);
 
                                                      //added temporarily to check date selection
@@ -184,24 +193,41 @@ public class HomeFragment extends Fragment {
                                                              new android.content.DialogInterface.OnClickListener() {
                                                                  public void onClick(DialogInterface dialog, int arg1) {
                                                                      // OK, go back to Main menu
+
+                                                                     //LayoutInflater inflaterDialog = getActivity().getLayoutInflater();
+                                                                     //View dialogLayout = inflaterDialog.inflate(R.layout.activity_alertdialog, null);
+
+                                                                     final RadioGroup radioGroup = (RadioGroup) dialogLayout.findViewById(R.id.radioGroup1);
+                                                                     int selectedId = radioGroup.getCheckedRadioButtonId();
+                                                                     final RadioButton radioButton = (RadioButton) dialogLayout.findViewById(selectedId);
+                                                                     String deliveryDate = radioButton.getText().toString();
+
+                                                                     //Toast.makeText(getActivity(), deliveryDate, Toast.LENGTH_SHORT).show();
+
                                                                      SharedPreferences.Editor editor = prefs.edit();
                                                                      editor.clear();
                                                                      editor.commit();
                                                                      subOrderBeanList.clear();
+
+                                                                     SharedPreferences.Editor deliveryDateEditor = deliveryDatePrefs.edit();
+                                                                     deliveryDateEditor.putString("deliveryDate", deliveryDate);
+                                                                     deliveryDateEditor.commit();
+
                                                                      subOrderBeanList.add(bfbean);
                                                                      SharedPreferences.Editor itemsEditor = prefs.edit();
                                                                      itemsEditor.putString("SubOrderList", new Gson().toJson(subOrderBeanList));
                                                                      itemsEditor.commit();
                                                                      Intent myIntent = new Intent(getActivity(), Plan1.class);
-                                                                     startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Breakfast").putExtra("itemPrice",String.format("%.2f", foodPrice)).putExtra("SeeAll","No"));
+                                                                     startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Breakfast").putExtra("itemPrice", String.format("%.2f", foodPrice)).putExtra("SeeAll", "No"));
                                                                  }
                                                              }
                                                      );
 
-                                                     ad.setOnCancelListener(new DialogInterface.OnCancelListener(){
+                                                     ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
                                                                                 public void onCancel(DialogInterface dialog) {
                                                                                     // OK, go back to Main menu
-                                                                                }}
+                                                                                }
+                                                                            }
                                                      );
 
                                                      ad.show();
@@ -407,8 +433,10 @@ public class HomeFragment extends Fragment {
 
         }
 
+////////////////////////////////////////////////////////////////////// Commented to test View All Button Click //////////////////////////////////////////////////////
 
-        TextView bfViewAll = (TextView)rootView.findViewById(R.id.bfSeeAll);
+
+        /*TextView bfViewAll = (TextView)rootView.findViewById(R.id.bfSeeAll);
         bfViewAll.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View v) {
@@ -439,7 +467,258 @@ public class HomeFragment extends Fragment {
                                              //startActivity(myIntent.putExtra("foodItem", "").putExtra("Course", "").putExtra("itemPrice", ""));
                                          }
                                      }
+        );*/
+
+
+        TextView bfViewAll = (TextView)rootView.findViewById(R.id.bfSeeAll);
+        bfViewAll.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View rowView) {
+
+                                             Gson json = new Gson();
+
+                                             List<MenuBean> listMenuBean = new ArrayList<MenuBean>();
+                                             List<MenuBean> breakfastlist = new ArrayList<MenuBean>();
+
+                                             List<SubOrderBean> subOrderBeanList = new ArrayList<SubOrderBean>();
+                                             Type listTypeSuborder = new TypeToken<ArrayList<SubOrderBean>>() {
+                                             }.getType();
+                                             //subOrderBeanList = json.fromJson(subOrderList, listTypeSuborder);
+
+                                             Type listType = new TypeToken<ArrayList<MenuBean>>() {
+                                             }.getType();
+                                             listMenuBean = json.fromJson(menuJsonList, listType);
+
+                                             for (MenuBean bean : listMenuBean) {
+                                                 if (bean.getCourseFlag() == 1) {
+                                                     breakfastlist.add(bean);
+                                                 }
+                                             }
+
+                                             final LayoutInflater inflaterDialogBF = getActivity().getLayoutInflater();
+                                             final View dialogLayoutBF = inflaterDialogBF.inflate(R.layout.activity_breakfast, null);
+
+                                             final GridLayout rl = (GridLayout) dialogLayoutBF.findViewById(R.id.GridLayoutBreakfast);
+                                             rl.removeAllViews();
+
+                                             for (int j = 0; j < breakfastlist.size(); j++) {
+
+                                                 String foodNameNew = breakfastlist.get(j).getItemName();
+                                                 double foodItemPrice = breakfastlist.get(j).getItemPrice();
+                                                 int foodKey = breakfastlist.get(j).getFoodKey();
+
+                                                 rowView = inflaterDialogBF.inflate(R.layout.home_item_list, null);
+
+                                                 TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
+                                                 ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+                                                 TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
+                                                 TextView priceAmount = (TextView) rowView.findViewById(R.id.price);
+                                                 Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
+                                                 Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
+                                                 EditText quantity = (EditText) rowView.findViewById(R.id.Count);
+                                                 txtTitle.setText(foodNameNew);
+                                                 imageView.setImageResource(R.drawable.food);
+                                                 extratxt.setText("Description of Food Item :  " + foodNameNew);
+                                                 priceAmount.setText(String.valueOf(foodItemPrice));
+                                                 rl.addView(rowView);
+
+                                             }
+
+
+                                             //added temporarily to check date selection
+                                                                                  AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+                                                                                  ad.setIcon(R.drawable.cart_icon);
+                                                                                  ad.setTitle(" View BreakFast Items !!! ");
+                                                                                  ad.setView(dialogLayoutBF);
+
+                                                                                  ad.setPositiveButton("OK",
+                                                                                          new android.content.DialogInterface.OnClickListener() {
+                                                                                              public void onClick(DialogInterface dialog, int arg1) {
+                                                                                                  // OK, go back to Main menu
+
+                                                                                                  //Intent myIntent = new Intent(getActivity(), Plan1.class);
+                                                                                                  //startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Breakfast").putExtra("itemPrice", String.format("%.2f", foodPrice)).putExtra("SeeAll", "No"));
+                                                                                              }
+                                                                                          }
+                                                                                  );
+
+                                             android.support.v7.app.AlertDialog allBF = ad.create();
+                                             allBF.show();
+                                             allBF.getWindow().setLayout(1050,1450);
+
+                                         }
+                                     }
         );
+
+        TextView lnViewAll = (TextView)rootView.findViewById(R.id.lnSeeAll);
+        lnViewAll.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View rowView) {
+
+                                             //Intent myIntent = new Intent(v.getContext(), Plan1.class);
+                                             //startActivity(myIntent.putExtra("foodItem", "").putExtra("Course", "Lunch").putExtra("itemPrice", 1.00).putExtra("SeeAll","Yes"));
+                                             //startActivity(myIntent.putExtra("foodItem", "").putExtra("Course", "").putExtra("itemPrice", ""));
+
+                                             Gson json = new Gson();
+
+                                             List<MenuBean> listMenuBean = new ArrayList<MenuBean>();
+                                             List<MenuBean> lunchlist = new ArrayList<MenuBean>();
+
+                                             List<SubOrderBean> subOrderBeanList = new ArrayList<SubOrderBean>();
+                                             Type listTypeSuborder = new TypeToken<ArrayList<SubOrderBean>>() {
+                                             }.getType();
+                                             //subOrderBeanList = json.fromJson(subOrderList, listTypeSuborder);
+
+                                             Type listType = new TypeToken<ArrayList<MenuBean>>() {
+                                             }.getType();
+                                             listMenuBean = json.fromJson(menuJsonList, listType);
+
+                                             for (MenuBean bean : listMenuBean) {
+                                                 if (bean.getCourseFlag() == 1) {
+                                                     lunchlist.add(bean);
+                                                 }
+                                             }
+
+                                             final LayoutInflater inflaterDialogLN = getActivity().getLayoutInflater();
+                                             final View dialogLayoutLN = inflaterDialogLN.inflate(R.layout.activity_lunch, null);
+
+                                             final GridLayout rl = (GridLayout) dialogLayoutLN.findViewById(R.id.GridLayoutLunch);
+                                             rl.removeAllViews();
+
+                                             for (int j = 0; j < lunchlist.size(); j++) {
+
+                                                 String foodNameNew = lunchlist.get(j).getItemName();
+                                                 double foodItemPrice = lunchlist.get(j).getItemPrice();
+                                                 int foodKey = lunchlist.get(j).getFoodKey();
+
+                                                 rowView = inflaterDialogLN.inflate(R.layout.home_item_list, null);
+
+                                                 TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
+                                                 ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+                                                 TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
+                                                 TextView priceAmount = (TextView) rowView.findViewById(R.id.price);
+                                                 Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
+                                                 Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
+                                                 EditText quantity = (EditText) rowView.findViewById(R.id.Count);
+                                                 txtTitle.setText(foodNameNew);
+                                                 imageView.setImageResource(R.drawable.food);
+                                                 extratxt.setText("Description of Food Item :  " + foodNameNew);
+                                                 priceAmount.setText(String.valueOf(foodItemPrice));
+                                                 rl.addView(rowView);
+
+                                             }
+
+
+                                             //added temporarily to check date selection
+                                             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+                                             ad.setIcon(R.drawable.cart_icon);
+                                             ad.setTitle(" View Lunch Items !!! ");
+                                             ad.setView(dialogLayoutLN);
+
+                                             ad.setPositiveButton("OK",
+                                                     new android.content.DialogInterface.OnClickListener() {
+                                                         public void onClick(DialogInterface dialog, int arg1) {
+                                                             // OK, go back to Main menu
+
+                                                             //Intent myIntent = new Intent(getActivity(), Plan1.class);
+                                                             //startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Breakfast").putExtra("itemPrice", String.format("%.2f", foodPrice)).putExtra("SeeAll", "No"));
+                                                         }
+                                                     }
+                                             );
+
+                                             android.support.v7.app.AlertDialog allLN = ad.create();
+                                             allLN.show();
+                                             allLN.getWindow().setLayout(1050,1450);
+
+                                         }
+                                     }
+        );
+
+        TextView dnViewAll = (TextView)rootView.findViewById(R.id.dnSeeAll);
+        dnViewAll.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View rowView) {
+
+                                             //Intent myIntent = new Intent(v.getContext(), Plan1.class);
+                                             //startActivity(myIntent.putExtra("foodItem", "").putExtra("Course", "Dinner").putExtra("itemPrice", 1.00).putExtra("SeeAll","Yes"));
+                                             //startActivity(myIntent.putExtra("foodItem", "").putExtra("Course", "").putExtra("itemPrice", ""));
+
+                                             Gson json = new Gson();
+
+                                             List<MenuBean> listMenuBean = new ArrayList<MenuBean>();
+                                             List<MenuBean> dinnerlist = new ArrayList<MenuBean>();
+
+                                             List<SubOrderBean> subOrderBeanList = new ArrayList<SubOrderBean>();
+                                             Type listTypeSuborder = new TypeToken<ArrayList<SubOrderBean>>() {
+                                             }.getType();
+                                             //subOrderBeanList = json.fromJson(subOrderList, listTypeSuborder);
+
+                                             Type listType = new TypeToken<ArrayList<MenuBean>>() {
+                                             }.getType();
+                                             listMenuBean = json.fromJson(menuJsonList, listType);
+
+                                             for (MenuBean bean : listMenuBean) {
+                                                 if (bean.getCourseFlag() == 1) {
+                                                     dinnerlist.add(bean);
+                                                 }
+                                             }
+
+                                             final LayoutInflater inflaterDialogDN = getActivity().getLayoutInflater();
+                                             final View dialogLayoutDN = inflaterDialogDN.inflate(R.layout.activity_dinner, null);
+
+                                             final GridLayout rl = (GridLayout) dialogLayoutDN.findViewById(R.id.GridLayoutDinner);
+                                             rl.removeAllViews();
+
+                                             for (int j = 0; j < dinnerlist.size(); j++) {
+
+                                                 String foodNameNew = dinnerlist.get(j).getItemName();
+                                                 double foodItemPrice = dinnerlist.get(j).getItemPrice();
+                                                 int foodKey = dinnerlist.get(j).getFoodKey();
+
+                                                 rowView = inflaterDialogDN.inflate(R.layout.home_item_list, null);
+
+                                                 TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
+                                                 ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+                                                 TextView extratxt = (TextView) rowView.findViewById(R.id.textView);
+                                                 TextView priceAmount = (TextView) rowView.findViewById(R.id.price);
+                                                 Button plusBtn = (Button) rowView.findViewById(R.id.plusButton);
+                                                 Button minusBtn = (Button) rowView.findViewById(R.id.minusButton);
+                                                 EditText quantity = (EditText) rowView.findViewById(R.id.Count);
+                                                 txtTitle.setText(foodNameNew);
+                                                 imageView.setImageResource(R.drawable.food);
+                                                 extratxt.setText("Description of Food Item :  " + foodNameNew);
+                                                 priceAmount.setText(String.valueOf(foodItemPrice));
+                                                 rl.addView(rowView);
+
+                                             }
+
+
+                                             //added temporarily to check date selection
+                                             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+                                             ad.setIcon(R.drawable.cart_icon);
+                                             ad.setTitle(" View Dinner Items !!! ");
+                                             ad.setView(dialogLayoutDN);
+
+                                             ad.setPositiveButton("OK",
+                                                     new android.content.DialogInterface.OnClickListener() {
+                                                         public void onClick(DialogInterface dialog, int arg1) {
+                                                             // OK, go back to Main menu
+
+                                                             //Intent myIntent = new Intent(getActivity(), Plan1.class);
+                                                             //startActivity(myIntent.putExtra("foodItem", foodItemName).putExtra("Course", "Breakfast").putExtra("itemPrice", String.format("%.2f", foodPrice)).putExtra("SeeAll", "No"));
+                                                         }
+                                                     }
+                                             );
+
+                                             android.support.v7.app.AlertDialog allDN = ad.create();
+                                             allDN.show();
+                                             allDN.getWindow().setLayout(1050,1450);
+
+
+                                         }
+                                     }
+        );
+
 
         TextView bfText = (TextView)rootView.findViewById(R.id.bfText);
         bfText.setTypeface(EasyFonts.droidSerifRegular(this.getContext()));

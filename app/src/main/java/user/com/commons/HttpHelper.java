@@ -80,7 +80,7 @@ public class HttpHelper {
 
 	private String buildUrl(String urn)
 	{
-		return "http://192.168.0.105:8081/FoodExUser/rest/User/" + urn;
+		return "http://192.168.0.102:8081/FoodExUser/rest/User/" + urn;
 	}
 
 	public void printconnectionError(Activity currentActivity){

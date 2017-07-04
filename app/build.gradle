@@ -33,4 +33,5 @@ dependencies {
     compile 'com.vstechlab.easyfonts:easyfonts:1.0.0'
     compile 'com.synnapps:carouselview:0.0.7'
     compile 'pl.rspective.pagerdatepicker:pagerdatepicker:1.2.0'
+    //compile group: 'com.fasterxml', name: 'jackson-xml-databind', version: '0.5.0'
 }

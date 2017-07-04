@@ -11,7 +11,32 @@ public class FinalSubOrderBean {
     private ArrayList<SubOrderBean> finalSubOrderList;
     private Date dateOfDelivery;
     private String mobileNumber;
-    private String addresKey;
+    private String addressKey;
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public Date getDateOfDelivery() {
+        return dateOfDelivery;
+    }
+
+    public void setDateOfDelivery(Date dateOfDelivery) {
+        this.dateOfDelivery = dateOfDelivery;
+    }
+
+    public String getAddressKey() {
+        return addressKey;
+    }
+
+    public void setAddressKey(String addressKey) {
+        this.addressKey = addressKey;
+    }
+
 
     public ArrayList<SubOrderBean> getFinalSubOrderList() {
         return finalSubOrderList;

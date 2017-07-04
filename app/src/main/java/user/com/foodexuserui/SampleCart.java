@@ -48,6 +48,7 @@ public class SampleCart extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_cart);
 
@@ -256,9 +257,30 @@ public class SampleCart extends AppCompatActivity {
                     finalbean.setFinalSubOrderList(dnsubOrderBeanList);
                 }
 
+                //finalbean.setDateOfDelivery(deliveryDateFinal);
+
+                SharedPreferences deliveryDateInfo = getSharedPreferences("deliveryDatePrefs", 0);
+                String deliveryDateFinal = deliveryDateInfo.getString("deliveryDate", "");
+
+                final SharedPreferences SubOrderCartPrefs = getSharedPreferences("SubOrderCart", 0);
+                SharedPreferences.Editor SubOrderCartEditor = SubOrderCartPrefs.edit();
+
+                Gson json = new Gson();
+                if (bfsubOrderBeanList != null) {
+                    SubOrderCartEditor.putString("BreakfastSubOrderCartList", json.toJson(bfsubOrderList));
+                }
+                if (bfsubOrderBeanList != null) {
+                    SubOrderCartEditor.putString("LunchSubOrderCartList", json.toJson(lnsubOrderList));
+                }
+                if (bfsubOrderBeanList != null) {
+                    SubOrderCartEditor.putString("DinnerSubOrderCartList", json.toJson(dnsubOrderList));
+                }
+
+                SubOrderCartEditor.putString("deliveryDateCart",deliveryDateFinal);
+                SubOrderCartEditor.commit();
+
                 Intent i = new Intent(SampleCart.this, DeliveryAddress.class);
                 startActivity(i);
-
 
             }
 

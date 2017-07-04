@@ -1,5 +1,6 @@
 package user.com.foodexuserui;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
@@ -77,6 +78,7 @@ public class NavigationDrawerFragment extends Fragment {
     private int[] images, selectedposition;
 
     public NavigationDrawerFragment() {
+
     }
 
     @Override
@@ -86,6 +88,7 @@ public class NavigationDrawerFragment extends Fragment {
         // Read in the flag indicating whether or not the user has demonstrated
         // awareness of the
         // drawer. See PREF_USER_LEARNED_DRAWER for details.
+
         SharedPreferences sp = PreferenceManager
                 .getDefaultSharedPreferences(getActivity());
         mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
@@ -115,6 +118,9 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawer = (LinearLayout) inflater.inflate(R.layout.fragment_layout, container, false);
         mDrawerListView = (ListView)mDrawer.findViewById(R.id.drawerListView);
 
+        SharedPreferences myAccountPrefs = getActivity().getSharedPreferences("MyAccountUserData", 0);
+        String userName = myAccountPrefs.getString("myAccountUserName", "");
+
         //mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_layout, container, false);
 
         mDrawerListView
@@ -127,49 +133,41 @@ public class NavigationDrawerFragment extends Fragment {
                             images[1] = img_profile;
                             images[2] = img_profile;
                             images[3] = img_profile;
+                            //images[4] = icon_contact;
                             images[4] = icon_contact;
-                            images[5] = icon_contact;
-                            images[6] = img_logout;
+                            images[5] = img_logout;
                         } else if (position == 1) {
                             images[0] = icon_home;
                             images[1] = img_profile;
                             images[2] = img_profile;
                             images[3] = img_profile;
+                            //images[4] = icon_contact;
                             images[4] = icon_contact;
-                            images[5] = icon_contact;
-                            images[6] = img_logout;
+                            images[5] = img_logout;
                         } else if (position == 2) {
                             images[0] = icon_home;
                             images[1] = img_profile;
                             images[2] = img_profile;
                             images[3] = img_profile;
+                            //images[4] = icon_contact;
                             images[4] = icon_contact;
-                            images[5] = icon_contact;
-                            images[6] = img_logout;
-                        }
-                        if (position == 3) {
+                            images[5] = img_logout;
+                        } if (position == 3) {
                             images[0] = icon_home;
                             images[1] = img_profile;
                             images[2] = img_profile;
                             images[3] = img_profile;
+                            //images[4] = icon_contact;
                             images[4] = icon_contact;
-                            images[5] = icon_contact;
-                            images[6] = img_logout;
+                            images[5] = img_logout;
                         } else if (position == 4) {
                             images[0] = icon_home;
                             images[1] = img_profile;
                             images[2] = img_profile;
                             images[3] = img_profile;
+                            //images[4] = icon_contact;
                             images[4] = icon_contact;
-                            images[5] = icon_contact;
-                            images[6] = img_logout;
-                        } else if (position == 5) {
-                            /*images[0] = img_profile;
-                            images[1] = img_orders;
-                            images[2] = img_logout;
-                            images[4] = img_profile;
-                            images[5] = img_orders;
-                            images[6] = img_logout;*/
+                            images[5] = img_logout;
                         }
                         selectedposition[0] = position;
                         mMyDrawerAdapter.notifyDataSetChanged();
@@ -177,7 +175,7 @@ public class NavigationDrawerFragment extends Fragment {
                     }
                 });
 
-        titles = new String[] { "Home","My Account","My Addresses","My Orders","Contact Us","About Us","Logout"};
+        titles = new String[] {"Hello," + userName,"My Account","My Addresses","Contact Us","About Us","Logout"};
         images = new int[] { icon_home, img_profile,img_profile,img_profile,
                 icon_contact,icon_contact, img_logout };
         selectedposition = new int[] { mCurrentSelectedPosition };
@@ -355,11 +353,11 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
+        /*if (item.getItemId() == R.id.action_example) {
             Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT)
                     .show();
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }

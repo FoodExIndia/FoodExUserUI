@@ -131,11 +131,86 @@ public class Login extends Activity {
                 bean5.setItemPrice(5);
                 bean5.setCourseFlag(1);
 
+                MenuBean bean6 = new MenuBean();
+                bean6.setFoodKey(105);
+                bean6.setItemName("BA");
+                bean6.setItemPrice(5);
+                bean6.setCourseFlag(1);
+
+                MenuBean bean7 = new MenuBean();
+                bean7.setFoodKey(105);
+                bean7.setItemName("CC");
+                bean7.setItemPrice(5);
+                bean7.setCourseFlag(1);
+
+                MenuBean bean8 = new MenuBean();
+                bean8.setFoodKey(105);
+                bean8.setItemName("BB");
+                bean8.setItemPrice(5);
+                bean8.setCourseFlag(1);
+
+                MenuBean bean9 = new MenuBean();
+                bean9.setFoodKey(105);
+                bean9.setItemName("DD");
+                bean9.setItemPrice(5);
+                bean9.setCourseFlag(1);
+
+                MenuBean bean10 = new MenuBean();
+                bean10.setFoodKey(105);
+                bean10.setItemName("AA");
+                bean10.setItemPrice(5);
+                bean10.setCourseFlag(1);
+
+                MenuBean bean11 = new MenuBean();
+                bean11.setFoodKey(105);
+                bean11.setItemName("CV");
+                bean11.setItemPrice(5);
+                bean11.setCourseFlag(1);
+
+                MenuBean bean12 = new MenuBean();
+                bean12.setFoodKey(105);
+                bean12.setItemName("KL");
+                bean12.setItemPrice(5);
+                bean12.setCourseFlag(1);
+
+                MenuBean bean13 = new MenuBean();
+                bean13.setFoodKey(105);
+                bean13.setItemName("FG");
+                bean13.setItemPrice(5);
+                bean13.setCourseFlag(1);
+
+                MenuBean bean14 = new MenuBean();
+                bean14.setFoodKey(105);
+                bean14.setItemName("DVD");
+                bean14.setItemPrice(5);
+                bean14.setCourseFlag(1);
+
+
+                MenuBean bean15 = new MenuBean();
+                bean15.setFoodKey(105);
+                bean15.setItemName("DVGGH");
+                bean15.setItemPrice(5);
+                bean15.setCourseFlag(1);
+
                 listMenuBean.add(bean1);
                 listMenuBean.add(bean2);
                 listMenuBean.add(bean3);
                 listMenuBean.add(bean4);
                 listMenuBean.add(bean5);
+                listMenuBean.add(bean6);
+                listMenuBean.add(bean7);
+                listMenuBean.add(bean8);
+                listMenuBean.add(bean9);
+                listMenuBean.add(bean10);
+                listMenuBean.add(bean11);
+                listMenuBean.add(bean12);
+                listMenuBean.add(bean13);
+                listMenuBean.add(bean14);
+                listMenuBean.add(bean15);
+
+
+
+
 
                 /*int SDK_INT = android.os.Build.VERSION.SDK_INT;
                 try {

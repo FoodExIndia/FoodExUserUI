@@ -50,6 +50,7 @@ import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import user.com.Entities.MenuBean;
@@ -399,6 +400,7 @@ public class Breakfast extends Fragment {
                                                            bfbean.setCourseFlag(1);
                                                            bfbean.setFoodName(foodNameNew);
                                                            bfbean.setFoodQuantity(q);
+                                                           bfbean.setDate(new Date());
 
                                                            String suborderJson = null;
                                                            suborderJson = prefs.getString("bfSubOrderList", suborderJson);

@@ -24,14 +24,14 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <!--<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/GLAddress"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="1"
                 android:rowCount="100"
-                tools:context=".GridXMLActivity" >-->
+                tools:context=".GridXMLActivity" >
 
             <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
@@ -42,19 +42,19 @@
                 android:rowCount="100"
                 tools:context=".GridXMLActivity" />
 
-            <!--</GridLayout>-->
+            </GridLayout>
 
         </RelativeLayout>
 
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="30px"
         android:orientation="horizontal"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -93,6 +93,5 @@
             android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
-
 
 </LinearLayout>
